@@ -1,22 +1,20 @@
 package model;
 
-public class MCQuestion implements Question {
+public class MCQuestion extends Question {
+	private String prompt;
+	private String correctAnswer;
+	public MCQuestion(String questionId, String prompt, String correctAnswer) {
+		this.questionId = questionId;
+		this.prompt = prompt;
+		this.correctAnswer = correctAnswer;
+	}
 	
-	public MCQuestion() {
-		
-	}
-
-	@Override
-	public String getQuestionType() {
-		return null;
-	}
-
 	@Override
 	public String getPrompt() {
-		return null;
+		return prompt;
 	}
 
-	public boolean checkAnswer() {
-		return false;
+	public boolean checkAnswer(String userInput) {
+		return userInput.equals(correctAnswer);
 	}
 }

@@ -1,22 +1,21 @@
 package model;
 
-public class TRQuestion implements Question {
+public class TRQuestion extends Question {
+	private String prompt;
+	private String correctAnswer;
 	
-	public TRQuestion() {
-		
-	}
-
-	@Override
-	public String getQuestionType() {
-		return null;
+	public TRQuestion(String questionId, String prompt, String correctAnswer) {
+		this.correctAnswer = correctAnswer;
+		this.prompt = prompt;
+		this.questionId = questionId;
 	}
 
 	@Override
 	public String getPrompt() {
-		return null;
+		return prompt;
 	}
 
 	public boolean checkAnswer(String userInput) {
-		return true;
+		return userInput.equals(correctAnswer);
 	}
 }

@@ -1,5 +1,7 @@
 package model;
 
+import java.util.ArrayList;
+
 public class User {
 	public String username;
 	public String dateJoined;
@@ -12,19 +14,19 @@ public class User {
 		this.lastName = lastName;
 	}
 	
-	public User[] getFriends() {
+	public ArrayList<User> getFriends() {
 		
 	}
 	
-	public Message[] getMessages() {
+	public ArrayList<Message> getMessages() {
 		
 	}
 	
-	public FriendRequest[] getFriendRequests() {
+	public ArrayList<FriendRequest> getFriendRequests() {
 		
 	}
 	
-	public Achievement[] getAchievements() {
+	public ArrayList<Achievement> getAchievements() {
 		
 	}
 	

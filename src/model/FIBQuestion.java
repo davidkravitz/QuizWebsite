@@ -1,22 +1,22 @@
 package model;
 
-public class FIBQuestion implements Question {
-	public FIBQuestion() {
-		
-	}
+public class FIBQuestion extends Question {
+	private String prompt;
+	private String correctAnswer;
 	
-	@Override
-	public String getQuestionType() {
-		return null;
+	public FIBQuestion(String questionId, String prompt, String correctAnswer) {
+		this.questionId = questionId;
+		this.prompt = prompt;
+		this.correctAnswer = correctAnswer;
 	}
 
 	@Override
 	public String getPrompt() {
-		return null;
+		return prompt;
 	}
 	
-	public boolean checkAnswer() {
-		return false;
+	public boolean checkAnswer(String userInput) {
+		return userInput.equals(this.correctAnswer);
 	}
 
 }

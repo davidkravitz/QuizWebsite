@@ -52,4 +52,8 @@ public class DBConnection {
 		return rs;
 	}
 	
+	public static DBConnection newConnection() {
+		return new DBConnection();
+	}
+	
 }

@@ -1,5 +1,7 @@
 package model;
 
+import java.sql.SQLException;
+
 public class PRQuestion extends Question {
 	private String prompt;
 	private String correctAnswer;
@@ -21,7 +23,16 @@ public class PRQuestion extends Question {
 		return imageUrl;
 	}
 
-	public boolean checkAnswer() {
-		return true;
+	public boolean checkAnswer(String userInput) {
+		return userInput.equals(correctAnswer);
+	}
+	
+	public static void createPRQuestion(int questionNumber, String prompt, String imageUrl, String correctAnswer, String quizName) {
+		String query = "INSERT into " + DBConnection.prQuestionTable + " (questionNumber, question, imageUrl, correctAnswer, quizName) VALUES ('" + questionNumber + "', '" + prompt + "', '" + imageUrl + "', '" + correctAnswer + "', '" + quizName + "')";
+		try {
+			DBConnection.newConnection().executeQuery(query);
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
 	}
 }

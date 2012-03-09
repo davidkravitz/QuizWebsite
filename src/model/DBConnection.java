@@ -23,6 +23,7 @@ public class DBConnection {
 	static String quizTable = "quizzes";
 	static String quizTakeTable = "quizTakes";
 	static String quizContentTable = "quizContents";
+	static String quizRatingTable = "quizRatings";
 	static String trQuestionTable = "trQuestinos";
 	static String fibQuestionTable = "fibQuestions";
 	static String mcQuestionTable = "mcQuestions";

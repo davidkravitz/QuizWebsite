@@ -1,5 +1,7 @@
 package model;
 
+import java.sql.SQLException;
+
 public class FIBQuestion extends Question {
 	private String prompt;
 	private String correctAnswer;
@@ -19,4 +21,12 @@ public class FIBQuestion extends Question {
 		return userInput.equals(this.correctAnswer);
 	}
 
+	public static void createFIBQuestion(int questionNumber, String prompt, String correctAnswer, String quizName) {
+		String query = "INSERT into " + DBConnection.fibQuestionTable + " (questionNumber, question, correctAnswer, quizName) VALUES ('" + questionNumber + "', '" + prompt + "', '" + correctAnswer + "', '" + quizName + "')";
+		try {
+			DBConnection.newConnection().executeQuery(query);
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+	}
 }

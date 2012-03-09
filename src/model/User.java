@@ -10,10 +10,10 @@ import java.util.Date;
 
 public class User {
 	public String username;
-	private String dateJoined;
-	private String firstName;
-	private String lastName;
-	private String imageUrl;
+	public String dateJoined;
+	public String firstName;
+	public String lastName;
+	public String imageUrl;
 	public User(String username, String dateJoined, String firstName, String lastName, String imageUrl) {
 		this.username = username;
 		this.dateJoined = dateJoined;

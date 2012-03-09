@@ -35,7 +35,7 @@ public class Quiz {
 		try {
 			ResultSet rs = DBConnection.newConnection().executeQuery(query);
 			while (rs.next()) {
-				quiz = new Quiz(rs.getString("category"), rs.getString("name"), rs.getString("createdBy"), rs.getString("description"), rs.getString("dateCreated"), Boolean.valueOf(rs.getString("randomized")), Boolean.valueOf(rs.getString("multiplePage")), Boolean.valueOf(rs.getString("immediateCorrection")));
+				quiz = new Quiz(rs.getString("category"), rs.getString("name"), rs.getString("createdBy"), rs.getString("description"), rs.getString("dateCreated"), rs.getString("randomized").equals("1") ? true : false, rs.getString("multiplePage").equals("1") ? true : false, rs.getString("immediateCorrection").equals("1") ? true : false);
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -52,7 +52,7 @@ public class Quiz {
 		try {
 			ResultSet rs = DBConnection.newConnection().executeQuery(query);
 			while (rs.next()) {
-				quizzes.add(new Quiz(rs.getString("category"), rs.getString("name"), rs.getString("createdBy"), rs.getString("description"), rs.getString("dateCreated"), Boolean.valueOf(rs.getString("randomized")), Boolean.valueOf(rs.getString("multiplePage")), Boolean.valueOf(rs.getString("immediateCorrection"))));
+				quizzes.add(new Quiz(rs.getString("category"), rs.getString("name"), rs.getString("createdBy"), rs.getString("description"), rs.getString("dateCreated"), rs.getString("randomized").equals("1") ? true : false, rs.getString("multiplePage").equals("1") ? true : false, rs.getString("immediateCorrection").equals("1") ? true : false));
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -69,7 +69,7 @@ public class Quiz {
 		try {
 			ResultSet rs = DBConnection.newConnection().executeQuery(query);
 			while (rs.next()) {
-				quizzes.add(new Quiz(rs.getString("category"), rs.getString("name"), rs.getString("createdBy"), rs.getString("description"), rs.getString("dateCreated"), Boolean.valueOf(rs.getString("randomized")), Boolean.valueOf(rs.getString("multiplePage")), Boolean.valueOf(rs.getString("immediateCorrection"))));
+				quizzes.add(new Quiz(rs.getString("category"), rs.getString("name"), rs.getString("createdBy"), rs.getString("description"), rs.getString("dateCreated"), rs.getString("randomized").equals("1") ? true : false, rs.getString("multiplePage").equals("1") ? true : false, rs.getString("immediateCorrection").equals("1") ? true : false));
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -125,27 +125,6 @@ public class Quiz {
 		return averageScore;
 	}
 	
-	public static void rankQuiz(String quizName, String username, int rating, String review) {
-		String query = "INSERT into " + DBConnection.quizRatingTable + " (username, quizName, rating, review) VALUES ('" + username + "', '" + quizName + "', '" + rating + "', '" + review + "')";
-		try {
-			DBConnection.newConnection().executeQuery(query);
-		} catch (SQLException e) {
-			e.printStackTrace();
-		}
-	}
-	
-	public static void recordCompletedQuiz(String quizName, String username, int score, String timeElapsed) {
-		DateFormat dateFormat = new SimpleDateFormat("yyyy:MM:dd HH:mm:ss");
-		Date date = new Date();
-		String stringDate = dateFormat.format(date);
-		String query = "INSERT into " + DBConnection.quizTakeTable + " (username, quizName, score, dateTaken, timeSpent) VALUES ('" + username + "', '" + quizName + "', '" + score + "', '" + stringDate + "', '" + timeElapsed + "')";
-		try {
-			DBConnection.newConnection().executeQuery(query);
-		} catch (SQLException e) {
-			e.printStackTrace();
-		}
-	}
-	
 	public static void removeQuiz(String quizName) {
 		String query = "DELETE FROM " + DBConnection.quizTable + " WHERE name = '" + quizName + "'";
 		try {
@@ -171,4 +150,5 @@ public class Quiz {
 		ArrayList<Question> questions = new ArrayList<Question>();
 		return questions;
 	}
+	
 }

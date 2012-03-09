@@ -82,68 +82,6 @@ public class User {
 		return friends;
 	}
 	
-	public static ArrayList<Message> getSentMessagesFor(String username, int limit) {
-		String query = "SELECT * FROM " + DBConnection.messageTable + " WHERE username = '" + username + "'";
-		if (limit > 0) {
-			query += " LIMIT " + limit;
-		}
-		ArrayList<Message> messages = new ArrayList<Message>();
-		try {
-			ResultSet rs = DBConnection.newConnection().executeQuery(query);
-			while (rs.next()) {
-				messages.add(new Message(rs.getString("username"), rs.getString("recipientName"), rs.getString("message"), rs.getString("text")));
-			}
-		} catch (SQLException e) {
-			e.printStackTrace();
-		}
-		return messages;
-	}
-	
-	public static ArrayList<Message> getReceivedMessagesFor(String username, int limit) {
-		String query = "SELECT * FROM " + DBConnection.friendsTable + " WHERE recipientName = '" + username + "'";
-		if (limit > 0) {
-			query += " LIMIT " + limit;
-		}
-		ArrayList<Message> messages = new ArrayList<Message>();
-		try {
-			ResultSet rs = DBConnection.newConnection().executeQuery(query);
-			while (rs.next()) {
-				messages.add(new Message(rs.getString("username"), rs.getString("recipientName"), rs.getString("message"), rs.getString("text")));
-			}
-		} catch (SQLException e) {
-			e.printStackTrace();
-		}
-		return messages;
-	}
-	
-	public static ArrayList<FriendRequest> getFriendRequestsFor(String username) {
-		String query = "SELECT * FROM " + DBConnection.friendRequestTable + " WHERE requestedName = '" + username + "'";
-		ArrayList<FriendRequest> friendRequests = new ArrayList<FriendRequest>();
-		try {
-			ResultSet rs = DBConnection.newConnection().executeQuery(query);
-			while (rs.next()) {
-				friendRequests.add(new FriendRequest(rs.getString("username"), rs.getString("requestedName")));
-			}
-		} catch (SQLException e) {
-			e.printStackTrace();
-		}
-		return friendRequests;
-	}
-	
-	public static ArrayList<Achievement> getAchievementsFor(String username) {
-		String query = "SELECT * FROM " + DBConnection.userAchievementsTable + " WHERE username = '" + username + "'";
-		ArrayList<Achievement> achievements = new ArrayList<Achievement>();
-		try {
-			ResultSet rs = DBConnection.newConnection().executeQuery(query);
-			while (rs.next()) {
-				achievements.add(new Achievement(rs.getString("achievementName"), "", ""));
-			}
-		} catch (SQLException e) {
-			e.printStackTrace();
-		}
-		return achievements;
-	}
-	
 	public static boolean userExists(String username) {
 		String query = "SELECT * FROM " + DBConnection.userTable + " WHERE username = '" + username + "'";
 		int numRows = 0;

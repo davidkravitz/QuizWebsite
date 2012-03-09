@@ -2,42 +2,21 @@ package model;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.Date;
 
 public class Achievement {
 	public String name;
-	private String description;
-	private String imageUrl;
-	public Achievement(String name, String description, String imageUrl) {
+	public String description;
+	public String imageUrl;
+	public String dateCreated;
+	public Achievement(String name, String description, String imageUrl, String dateCreated) {
 		this.name = name;
 		this.description = description;
 		this.imageUrl = imageUrl;
-	}
-	
-	private void initalizeVariables() {
-		String query = "SELECT * FROM " + DBConnection.achievementsTable + " WHERE name = '" + this.name + "'";
-		try {
-			ResultSet rs = DBConnection.newConnection().executeQuery(query);
-			while (rs.next()) {
-				this.description = rs.getString("description");
-				this.imageUrl = rs.getString("imageUrl");
-			}
-		} catch (SQLException e) {
-			e.printStackTrace();
-		}
-	}
-	
-	public String getDescription() {
-		if (this.description.equals("")) {
-			this.initalizeVariables();
-		}
-		return this.description;
-	}
-	
-	public String getImageUrl() {
-		if (this.imageUrl.equals("")) {
-			this.initalizeVariables();
-		}
-		return this.imageUrl;
+		this.dateCreated = dateCreated;
 	}
 	
 	public static void makeAchievement(String name, String description, String imageUrl) {
@@ -50,11 +29,28 @@ public class Achievement {
 	}
 	
 	public static void awardAchievement(String name, String username) {
-		String query = "INSERT into " + DBConnection.userAchievementsTable + " (username, achievementName) VALUES ('" + username + "', '" + name + "')";
+		DateFormat dateFormat = new SimpleDateFormat("yyyy:MM:dd HH:mm:ss");
+		Date date = new Date();
+		String stringDate = dateFormat.format(date);
+		String query = "INSERT into " + DBConnection.userAchievementsTable + " (username, achievementName, dateCreated) VALUES ('" + username + "', '" + name + "', '" + stringDate + "')";
 		try {
 			DBConnection.newConnection().executeQuery(query);
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
+	}
+	
+	public static ArrayList<Achievement> getAchievementsFor(String username) {
+		String query = "SELECT achievements.name, achievements.description, achievements.imageUrl, joined.dateCreated from achievements inner join (select * from userAchievements where username '" + username + "') joined on achievements.name = joined.achievementName";
+		ArrayList<Achievement> achievements = new ArrayList<Achievement>();
+		try {
+			ResultSet rs = DBConnection.newConnection().executeQuery(query);
+			while (rs.next()) {
+				achievements.add(new Achievement(rs.getString("name"), rs.getString("description"), rs.getString("imageUrl"), rs.getString("dateCreated")));
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return achievements;
 	}
 }

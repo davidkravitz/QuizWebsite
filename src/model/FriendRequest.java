@@ -18,4 +18,6 @@ public class FriendRequest {
 			e.printStackTrace();
 		}
 	}
+	
+	public static void acceptFriendRequest
 }

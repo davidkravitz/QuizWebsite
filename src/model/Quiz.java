@@ -166,4 +166,9 @@ public class Quiz {
 			e.printStackTrace();
 		}
 	}
+	
+	public static ArrayList<Question> getQuestionsForQuiz(String quizName) {
+		ArrayList<Question> questions = new ArrayList<Question>();
+		return questions;
+	}
 }

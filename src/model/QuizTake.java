@@ -47,4 +47,38 @@ public class QuizTake {
 			e.printStackTrace();
 		}
 	}
+	
+	public static ArrayList<QuizTake> getTopScorersFor(String quizName, int limit) {
+		String query = "SELECT * FROM " + DBConnection.quizTakeTable + " WHERE quizName = '" + quizName + "' " + " ORDER BY score DESC";
+		if (limit > 0) {
+			query += " LIMIT " + limit;
+		}
+		ArrayList<QuizTake> quizTakes = new ArrayList<QuizTake>();
+		try {
+			ResultSet rs = DBConnection.newConnection().executeQuery(query);
+			while (rs.next()) {
+				quizTakes.add(new QuizTake(rs.getString("quizName"), rs.getString("username"), Integer.valueOf(rs.getString("score")), rs.getString("dateTaken"), rs.getString("timeSpent")));
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return quizTakes;
+	}
+	
+	public static ArrayList<QuizTake> getQuizTakersFor(String quizName, int limit) {
+		String query = "SELECT * FROM " + DBConnection.quizTakeTable + " WHERE quizName = '" + quizName + "' " + " ORDER BY dateTaken DESC";
+		if (limit > 0) {
+			query += " LIMIT " + limit;
+		}
+		ArrayList<QuizTake> quizTakes = new ArrayList<QuizTake>();
+		try {
+			ResultSet rs = DBConnection.newConnection().executeQuery(query);
+			while (rs.next()) {
+				quizTakes.add(new QuizTake(rs.getString("quizName"), rs.getString("username"), Integer.valueOf(rs.getString("score")), rs.getString("dateTaken"), rs.getString("timeSpent")));
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return quizTakes;
+	}
 }

@@ -22,51 +22,8 @@ public class User {
 		this.imageUrl = imageUrl;
 	}
 	
-	private void initializeVariables() {
-		String query = "SELECT * FROM " + DBConnection.userTable + " WHERE username = '" + this.username + "'";
-		try {
-			ResultSet rs = DBConnection.newConnection().executeQuery(query);
-			while (rs.next()) {
-				this.dateJoined = rs.getString("dateJoined");
-				this.firstName = rs.getString("firstName");
-				this.lastName = rs.getString("lastName");
-				this.imageUrl = rs.getString("imageUrl");
-			}
-		} catch (SQLException e) {
-			e.printStackTrace();
-		}
-	}
-	
-	public String getDateJoined() {
-		if (this.dateJoined.equals("")) {
-			this.initializeVariables();
-		}
-		return this.dateJoined;
-	}
-	
-	public String getImageUrl() {
-		if (this.imageUrl.equals("")) {
-			this.initializeVariables();
-		}
-		return this.imageUrl;
-	}
-	
-	public String getFirstName() {
-		if (this.firstName.equals("")) {
-			this.initializeVariables();
-		}
-		return this.firstName;
-	}
-	
-	public String getLastName() {
-		if (this.lastName.equals("")) {
-			this.initializeVariables();
-		}
-		return this.lastName;
-	}
-	
 	public static ArrayList<User> getFriendsFor(String username, int limit) {
-		String query = "SELECT * FROM " + DBConnection.friendsTable + " WHERE username = '" + username + "'";
+		String query = "select users.username, users.firstName, users.lastName, users.dateJoined, users.imageUrl from users inner join (select * from friends where username = '" + username + "') filtered on users.username = filtered.friendName";
 		if (limit > 0) {
 			query += " LIMIT " + limit;
 		}
@@ -100,9 +57,8 @@ public class User {
 		}
 	}
 	
-	public static User getUser(String username, String password) {
-		String encryptedPw = createHash(password);
-		String query = "SELECT * FROM " + DBConnection.userTable + " WHERE username = '" + username + "' AND encryptedPassword = '" + encryptedPw + "'";
+	public static User getUser(String username) {
+		String query = "SELECT * FROM " + DBConnection.userTable + " WHERE username = '" + username + "'";
 		User user = null;
 		try {
 			ResultSet rs = DBConnection.newConnection().executeQuery(query);

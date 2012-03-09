@@ -41,7 +41,7 @@ public class Achievement {
 	}
 	
 	public static ArrayList<Achievement> getAchievementsFor(String username) {
-		String query = "SELECT achievements.name, achievements.description, achievements.imageUrl, joined.dateCreated from achievements inner join (select * from userAchievements where username '" + username + "') joined on achievements.name = joined.achievementName";
+		String query = "SELECT achievements.name, achievements.description, achievements.imageUrl, filtered.dateCreated from achievements inner join (select * from userAchievements where username '" + username + "') filtered on achievements.name = filtered.achievementName";
 		ArrayList<Achievement> achievements = new ArrayList<Achievement>();
 		try {
 			ResultSet rs = DBConnection.newConnection().executeQuery(query);

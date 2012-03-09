@@ -77,40 +77,6 @@ public class Quiz {
 		return quizzes;
 	}
 	
-	public static ArrayList<User> getTopScorersFor(String quizName, int limit) {
-		String query = "SELECT * FROM " + DBConnection.quizTakeTable + " WHERE quizName = '" + quizName + "' " + " ORDER BY score DESC";
-		if (limit > 0) {
-			query += " LIMIT " + limit;
-		}
-		ArrayList<User> users = new ArrayList<User>();
-		try {
-			ResultSet rs = DBConnection.newConnection().executeQuery(query);
-			while (rs.next()) {
-				users.add(new User(rs.getString("username"), "", "", "", ""));
-			}
-		} catch (SQLException e) {
-			e.printStackTrace();
-		}
-		return users;
-	}
-	
-	public static ArrayList<User> getQuizTakersFor(String quizName, int limit) {
-		String query = "SELECT * FROM " + DBConnection.quizTakeTable + " WHERE quizName = '" + quizName + "' " + " ORDER BY dateTaken DESC";
-		if (limit > 0) {
-			query += " LIMIT " + limit;
-		}
-		ArrayList<User> users = new ArrayList<User>();
-		try {
-			ResultSet rs = DBConnection.newConnection().executeQuery(query);
-			while (rs.next()) {
-				users.add(new User(rs.getString("username"), "", "", "", ""));
-			}
-		} catch (SQLException e) {
-			e.printStackTrace();
-		}
-		return users;
-	}
-	
 	public static double getAverageScoreFor(String quizName) {
 		String query = "SELECT AVG(score) FROM " + DBConnection.quizTakeTable + " WHERE quizName = '" + quizName + "'";
 		double averageScore = 0.0;

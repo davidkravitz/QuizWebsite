@@ -47,10 +47,24 @@ public class DBConnection {
 		}
 	}
 	
+	/*
+	 * Used for reading the content of the database, e.g. SELECT. Returns 
+	 * the result of the query in a ResultSet.
+	 */
 	public ResultSet executeQuery(String query) throws SQLException {
 		Statement stmt = con.createStatement();
 		ResultSet rs = stmt.executeQuery(query);
 		return rs;
+	}
+	
+	/*
+	 * User for altering the databases. DROP TABLE, INSERT into TABLE, UPDATE TABLE,
+	 * DELETE from TABLE, etc. Returns the number of rows affected by the query.
+	 */
+	public int executeUpdate(String update) throws SQLException {
+		Statement stmt = con.createStatement();
+		int numRowsAffected = stmt.executeUpdate(update);
+		return numRowsAffected;
 	}
 	
 	public static DBConnection newConnection() {

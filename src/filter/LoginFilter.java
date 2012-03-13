@@ -22,7 +22,7 @@ import model.User;
  * It is expected that most mapped urls requiring LoginFilter will also be
  * chained to an authorization request using AuthorizationFilter.
  */
-@WebFilter("/index.html")
+@WebFilter("/index.jsp")
 public class LoginFilter implements Filter {
 
 	// URL location of the login entry screen
@@ -44,7 +44,8 @@ public class LoginFilter implements Filter {
 		HttpServletRequest httpRequest = (HttpServletRequest) request;
 		HttpServletResponse httpResponse = (HttpServletResponse) response;
 
-		User user = (User) httpRequest.getSession().getAttribute("user");            
+		String username = (String) httpRequest.getSession().getAttribute("username");  
+		User user = User.getUser(username);
 
 		if (user == null) {
 

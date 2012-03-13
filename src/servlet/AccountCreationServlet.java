@@ -36,13 +36,15 @@ public class AccountCreationServlet extends HttpServlet {
 		// "welcome" page.
 		if (User.userExists(username)) {
 			HttpSession session = request.getSession();
+			User user = User.getUser(username);
 			session.setAttribute("username", username);
 			request.getRequestDispatcher("account-exists.jsp").forward(request, response);
 		} else {
 			User.createUser(username, password, "", "", "");
 			HttpSession session = request.getSession();
+			User user = User.getUser(username);
 			session.setAttribute("username", username);
-			request.getRequestDispatcher("index.html").forward(request, response);
+			request.getRequestDispatcher("index.jsp").forward(request, response);
 		}
 		
 	}

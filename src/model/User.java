@@ -119,13 +119,14 @@ public class User {
 	}
 	
 	public static void createUser(String username, String password, String firstName, String lastName, String imageUrl) {
+		System.out.println("Creating new user");
 		String encryptedPw = createHash(password);
 		DateFormat dateFormat = new SimpleDateFormat("yyyy:MM:dd HH:mm:ss");
 		Date date = new Date();
 		String stringDate = dateFormat.format(date);
 		String query = "INSERT into " + DBConnection.userTable + " (firstName, lastName, username, dateJoined, encryptedPassword, imageUrl) VALUES ('" + firstName + "', '" + lastName + "', '" + username + "', '" + stringDate + "', '" + encryptedPw + "', '" + imageUrl + "')";
 		try {
-			DBConnection.newConnection().executeQuery(query);
+			DBConnection.newConnection().executeUpdate(query);
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
@@ -134,7 +135,7 @@ public class User {
 	public static void removeUser(String username) {
 		String query = "DELETE FROM " + DBConnection.userTable + " WHERE name = '" + username + "'";
 		try {
-			DBConnection.newConnection().executeQuery(query);
+			DBConnection.newConnection().executeUpdate(query);
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}

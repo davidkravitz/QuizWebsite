@@ -14,6 +14,7 @@ public class Quiz {
 	public String name;
 	public String createdBy;
 	public String dateCreated;
+	public String description;
 	public boolean randomized;
 	public boolean multiplePage;
 	public boolean immediateCorrection;
@@ -22,6 +23,7 @@ public class Quiz {
 		this.questions = new HashSet<Question>();
 		this.category = category;
 		this.createdBy = createdBy;
+		this.description = description;
 		this.name = name;
 		this.randomized = randomized;
 		this.multiplePage = multiplePage;

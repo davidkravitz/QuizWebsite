@@ -26,7 +26,7 @@ public class MCQuestion extends Question {
 	public static void createMCQuestion(int questionNumber, String prompt, String correctAnswer, String icAnswerOne, String icAnswerTwo, String icAnswerThree, String quizName) {
 		String query = "INSERT into " + DBConnection.mcQuestionTable + " (questionNumber, question, correctAnswer, icAnswerOne, icAnswerTwo, icAnswerThree, quizName) VALUES ('" + questionNumber + "', '" + prompt + "', '" + correctAnswer + "', '" + icAnswerOne + "', '" + icAnswerTwo + "', '" + icAnswerThree + "', '" + quizName + "')";
 		try {
-			DBConnection.newConnection().executeQuery(query);
+			DBConnection.newConnection().executeUpdate(query);
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}

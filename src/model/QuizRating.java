@@ -27,7 +27,7 @@ public class QuizRating {
 		String stringDate = dateFormat.format(date);
 		String query = "INSERT into " + DBConnection.quizRatingTable + " (username, quizName, rating, review, dateCreated) VALUES ('" + username + "', '" + quizName + "', '" + rating + "', '" + review + "', '" + stringDate + "')";
 		try {
-			DBConnection.newConnection().executeQuery(query);
+			DBConnection.newConnection().executeUpdate(query);
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}

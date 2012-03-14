@@ -42,7 +42,7 @@ public class QuizTake {
 		String stringDate = dateFormat.format(date);
 		String query = "INSERT into " + DBConnection.quizTakeTable + " (username, quizName, score, dateTaken, timeSpent) VALUES ('" + username + "', '" + quizName + "', '" + score + "', '" + stringDate + "', '" + timeElapsed + "')";
 		try {
-			DBConnection.newConnection().executeQuery(query);
+			DBConnection.newConnection().executeUpdate(query);
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}

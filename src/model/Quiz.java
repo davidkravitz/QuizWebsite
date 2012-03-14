@@ -94,7 +94,7 @@ public class Quiz {
 	public static void removeQuiz(String quizName) {
 		String query = "DELETE FROM " + DBConnection.quizTable + " WHERE name = '" + quizName + "'";
 		try {
-			DBConnection.newConnection().executeQuery(query);
+			DBConnection.newConnection().executeUpdate(query);
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
@@ -106,7 +106,7 @@ public class Quiz {
 		String stringDate = dateFormat.format(date);
 		String query = "INSERT into " + DBConnection.quizTable + " (name, category, description, createdBy, dateCreated, randomized, multiplePage, immediateCorrection) VALUES ('" + quizName + "', '" + category + "', '" + description + "', '" + createdBy + "', '" + stringDate + "', '" + (randomized ? 1 : 0) + "', '" + (multiplePage ? 1 : 0) + "', '" + (immediateCorrection ? 1 : 0) + "')";
 		try {
-			DBConnection.newConnection().executeQuery(query);
+			DBConnection.newConnection().executeUpdate(query);
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}

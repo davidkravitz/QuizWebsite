@@ -21,7 +21,7 @@ public class QuizReport {
 	public static void reportQuiz(String username, String quizName, String message, String type, String dateCreated) {
 		String query = "INSERT into " + DBConnection.reportedQuizzesTable + " (username, quiz, message, type, dateCreated) VALUES ('" + username + "', '" + quizName + "', '" + message + "', '" + type + "', '" + dateCreated + "')";
 		try {
-			DBConnection.newConnection().executeQuery(query);
+			DBConnection.newConnection().executeUpdate(query);
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}

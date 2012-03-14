@@ -24,7 +24,7 @@ public class FIBQuestion extends Question {
 	public static void createFIBQuestion(int questionNumber, String prompt, String correctAnswer, String quizName) {
 		String query = "INSERT into " + DBConnection.fibQuestionTable + " (questionNumber, question, correctAnswer, quizName) VALUES ('" + questionNumber + "', '" + prompt + "', '" + correctAnswer + "', '" + quizName + "')";
 		try {
-			DBConnection.newConnection().executeQuery(query);
+			DBConnection.newConnection().executeUpdate(query);
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}

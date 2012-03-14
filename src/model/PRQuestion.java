@@ -30,7 +30,7 @@ public class PRQuestion extends Question {
 	public static void createPRQuestion(int questionNumber, String prompt, String imageUrl, String correctAnswer, String quizName) {
 		String query = "INSERT into " + DBConnection.prQuestionTable + " (questionNumber, question, imageUrl, correctAnswer, quizName) VALUES ('" + questionNumber + "', '" + prompt + "', '" + imageUrl + "', '" + correctAnswer + "', '" + quizName + "')";
 		try {
-			DBConnection.newConnection().executeQuery(query);
+			DBConnection.newConnection().executeUpdate(query);
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}

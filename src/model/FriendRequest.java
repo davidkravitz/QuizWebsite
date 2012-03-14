@@ -23,7 +23,7 @@ public class FriendRequest {
 		String stringDate = dateFormat.format(date);
 		String query = "INSERT into " + DBConnection.friendRequestTable + " (requestedName, requestingName, dateCreated) VALUES ('" + requestedName + "', '" + requestingName + "', '" + stringDate + "')";
 		try {
-			DBConnection.newConnection().executeQuery(query);
+			DBConnection.newConnection().executeUpdate(query);
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
@@ -35,9 +35,9 @@ public class FriendRequest {
 		String query3 = "INSERT into " + DBConnection.friendsTable + " (username, friendName) VALUES ('" + requestingName + "', '" + requestedName + "')";
 		try {
 			DBConnection db = DBConnection.newConnection();
-			db.executeQuery(query1);
-			db.executeQuery(query2);
-			db.executeQuery(query3);
+			db.executeUpdate(query1);
+			db.executeUpdate(query2);
+			db.executeUpdate(query3);
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}

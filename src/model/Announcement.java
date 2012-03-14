@@ -42,7 +42,7 @@ public class Announcement {
 		String stringDate = dateFormat.format(date);
 		String query = "INSERT into " + DBConnection.announcementTable + " (type, message, title, created) VALUES ('" + type + "', '" + message + "', '" + title + "', '" + stringDate + "')";
 		try {
-			DBConnection.newConnection().executeQuery(query);
+			DBConnection.newConnection().executeUpdate(query);
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}

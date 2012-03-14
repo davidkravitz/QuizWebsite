@@ -22,7 +22,7 @@ public class Achievement {
 	public static void makeAchievement(String name, String description, String imageUrl) {
 		String query = "INSERT into " + DBConnection.achievementsTable + " (name, description, imageUrl) VALUES ('" + name + "', '" + description + "', '" + imageUrl + "')";
 		try {
-			DBConnection.newConnection().executeQuery(query);
+			DBConnection.newConnection().executeUpdate(query);
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
@@ -34,7 +34,7 @@ public class Achievement {
 		String stringDate = dateFormat.format(date);
 		String query = "INSERT into " + DBConnection.userAchievementsTable + " (username, achievementName, dateCreated) VALUES ('" + username + "', '" + name + "', '" + stringDate + "')";
 		try {
-			DBConnection.newConnection().executeQuery(query);
+			DBConnection.newConnection().executeUpdate(query);
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}

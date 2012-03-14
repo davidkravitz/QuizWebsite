@@ -24,7 +24,7 @@ public class TRQuestion extends Question {
 	public static void createTRQuestion(int questionNumber, String prompt, String correctAnswer, String quizName) {
 		String query = "INSERT into " + DBConnection.trQuestionTable + " (questionNumber, question, correctAnswer, quizName) VALUES ('" + questionNumber + "', '" + prompt + "', '" + correctAnswer + "', '" + quizName + "')";
 		try {
-			DBConnection.newConnection().executeQuery(query);
+			DBConnection.newConnection().executeUpdate(query);
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}

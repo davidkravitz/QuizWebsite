@@ -278,8 +278,8 @@ form label {
 item page is the name of the item.*/
 .title {
     color:#222;
-    font-size: 20px;
-    font-weight: normal;
+    font-size: 16px;
+    font-weight: bold;
 	width:auto;
     overflow-x: hidden;
     border: none;
@@ -888,11 +888,7 @@ div.create-list-item-loading{
     margin-left: -30%;
 }
 
-
-
 /* The new lists on the home page 
- * Jeremy
- * November 23, 2011
  */
  #home-list-header{
      font-size: 20px;

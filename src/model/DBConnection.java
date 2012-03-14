@@ -58,7 +58,7 @@ public class DBConnection {
 	}
 	
 	/*
-	 * User for altering the databases. DROP TABLE, INSERT into TABLE, UPDATE TABLE,
+	 * User for altering the databases. DROP TABLE or DATABASE, INSERT into TABLE, UPDATE TABLE,
 	 * DELETE from TABLE, etc. Returns the number of rows affected by the query.
 	 */
 	public int executeUpdate(String update) throws SQLException {

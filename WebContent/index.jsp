@@ -11,29 +11,19 @@
 <body>  
     <div class="container">
         
-        <div id="header">
-    		<div id="userpanel">
-                Hello, <b><%=(String) session.getAttribute("username")%></b>.
-                <a href="extras">Extras</a>
-                <span style="color: #ccc;">-</span>
-                <a href="profile.jsp">Account</a>
-                <span style="color: #ccc;">-</span>
-                <a href="logout.jsp">Log out</a>    
-            </div>
+        <%@include file="header.jsp"%>
         
-            <h1 id="logo">
-                <a href="index.jsp" class="logo">QuizWebsite</a>
-            </h1>
-
-            <div style="font-size: 14px; margin-top: 8px;">A simple website to create, take, and share quizzes.</div>
-        </div>
+        <div id="content">
+			<div id="left-column">
+				<div id="home-list-header">Recently Made Quizes</div>
+			</div>
+			
+			<div id="right-column">
+			</div>
+		</div>
         
-        <%-- <%@include file="header.html"%> --%>
-        
-        
-
         <div id="footer">
-            <p>2012</p>
+            <p>QuizWebsite 2012</p>
         </div>
 
     </div>

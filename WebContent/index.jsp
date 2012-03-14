@@ -9,7 +9,7 @@
 </head>
 
 <body>  
-    <div class="container">
+    <div id="wrapper">
         
         <%@include file="header.jsp"%>
         

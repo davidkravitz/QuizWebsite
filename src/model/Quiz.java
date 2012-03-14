@@ -32,7 +32,7 @@ public class Quiz {
 	}
 	
 	public static Quiz getQuiz(int quizId) {
-		String query = "SELECT TOP 1 * FROM " + DBConnection.quizTable + " WHERE quizId = '" + quizId + "'";
+		String query = "SELECT * FROM " + DBConnection.quizTable + " WHERE quizId = '" + quizId + "'";
 		Quiz quiz = null;
 		try {
 			ResultSet rs = DBConnection.newConnection().executeQuery(query);

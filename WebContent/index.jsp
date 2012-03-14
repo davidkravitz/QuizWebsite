@@ -68,7 +68,7 @@
 				</div>
 				
 				<div class="homepage-section">
-					<div class="title">Quizzes You've Taken'</div>
+					<div class="title">Quizzes You've Taken</div>
 					<%
 		/* 				String username = (String) session.getAttribute("username");
 						ArrayList<QuizTake> quizTakes = QuizTake.getTakenQuizzesForUser(username); */
@@ -86,10 +86,21 @@
 						}
 					%>
 				</div>
-				<div class="title"></div>
+				
+				
+				<div class="homepage-section">
+				<div class="title">Your Friends' Recent Activity</div>
+				</div>
+				
 			</div>
 			
 			<div id="right-column">
+				<div class="announcement">
+				    <p>Here are your achievements:</p>
+				</div>
+				<div class="announcement">
+				    <p>Here are your messages:</p>
+				</div>
 			</div>
 		</div>
         

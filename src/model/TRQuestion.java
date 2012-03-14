@@ -7,9 +7,9 @@ public class TRQuestion extends Question {
 	private String correctAnswer;
 	
 	public TRQuestion(String questionId, String prompt, String correctAnswer) {
+		this.questionId = questionId;
 		this.correctAnswer = correctAnswer;
 		this.prompt = prompt;
-		this.questionId = questionId;
 	}
 
 	@Override
@@ -21,8 +21,8 @@ public class TRQuestion extends Question {
 		return userInput.equals(correctAnswer);
 	}
 	
-	public static void createTRQuestion(int questionNumber, String prompt, String correctAnswer, String quizName) {
-		String query = "INSERT into " + DBConnection.trQuestionTable + " (questionNumber, question, correctAnswer, quizName) VALUES ('" + questionNumber + "', '" + prompt + "', '" + correctAnswer + "', '" + quizName + "')";
+	public static void createTRQuestion(int questionNumber, String prompt, String correctAnswer, int quizId) {
+		String query = "INSERT into " + DBConnection.trQuestionTable + " (questionId, question, correctAnswer, quizId) VALUES ('TR_" + questionNumber + "', '" + prompt + "', '" + correctAnswer + "', '" + quizId + "')";
 		try {
 			DBConnection.newConnection().executeUpdate(query);
 		} catch (SQLException e) {

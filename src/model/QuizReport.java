@@ -6,13 +6,13 @@ import java.util.ArrayList;
 
 public class QuizReport {
 	public String username;
-	public String quizName;
+	public int quizId;
 	public String message;
 	public String type;
 	public String dateCreated;
-	public QuizReport(String username, String quizName, String message, String type, String dateCreated) {
+	public QuizReport(String username, int quizId, String message, String type, String dateCreated) {
 		this.username = username;
-		this.quizName = quizName;
+		this.quizId = quizId;
 		this.message = message;
 		this.type = type;
 		this.dateCreated = dateCreated;
@@ -35,7 +35,7 @@ public class QuizReport {
 		try {
 			ResultSet rs = DBConnection.newConnection().executeQuery(query);
 			while (rs.next()) {
-				reportedQuizzes.add(new QuizReport(rs.getString("username"), rs.getString("quiz"), rs.getString("message"), rs.getString("type"), rs.getString("description")));
+				reportedQuizzes.add(new QuizReport(rs.getString("username"), Integer.valueOf(rs.getString("quizId")), rs.getString("message"), rs.getString("type"), rs.getString("description")));
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();

@@ -9,13 +9,13 @@ import java.util.Date;
 
 public class QuizRating {
 	public String username;
-	public String quizName;
+	public int quizId;
 	public int rating;
 	public String review;
 	public String dateCreated;
-	public QuizRating(String username, String quizName, int rating, String review, String dateCreated) {
+	public QuizRating(String username, int quizId, int rating, String review, String dateCreated) {
 		this.username = username;
-		this.quizName = quizName;
+		this.quizId = quizId;
 		this.rating = rating;
 		this.review = review;
 		this.dateCreated = dateCreated;
@@ -42,7 +42,7 @@ public class QuizRating {
 		try {
 			ResultSet rs = DBConnection.newConnection().executeQuery(query);
 			while (rs.next()) {
-				ratings.add(new QuizRating(rs.getString("username"), rs.getString("quizName"), Integer.valueOf(rs.getString("rating")), rs.getString("review"), rs.getString("dateCreated")));
+				ratings.add(new QuizRating(rs.getString("username"), Integer.valueOf(rs.getString("quizId")), Integer.valueOf(rs.getString("rating")), rs.getString("review"), rs.getString("dateCreated")));
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();

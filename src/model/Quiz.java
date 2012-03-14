@@ -17,8 +17,9 @@ public class Quiz {
 	public boolean randomized;
 	public boolean multiplePage;
 	public boolean immediateCorrection;
+	public int quizId;
 	
-	public Quiz(String category, String name, String createdBy, String description, String dateCreated, boolean randomized, boolean multiplePage, boolean immediateCorrection) {
+	public Quiz(int quizId, String category, String name, String createdBy, String description, String dateCreated, boolean randomized, boolean multiplePage, boolean immediateCorrection) {
 		this.questions = new HashSet<Question>();
 		this.category = category;
 		this.createdBy = createdBy;
@@ -27,15 +28,16 @@ public class Quiz {
 		this.multiplePage = multiplePage;
 		this.immediateCorrection = immediateCorrection;
 		this.dateCreated = dateCreated;
+		this.quizId = quizId;
 	}
 	
-	public static Quiz getQuiz(String quizName) {
-		String query = "SELECT TOP 1 * FROM " + DBConnection.quizTable + " WHERE quizName = '" + quizName + "'";
+	public static Quiz getQuiz(int quizId) {
+		String query = "SELECT TOP 1 * FROM " + DBConnection.quizTable + " WHERE quizId = '" + quizId + "'";
 		Quiz quiz = null;
 		try {
 			ResultSet rs = DBConnection.newConnection().executeQuery(query);
 			while (rs.next()) {
-				quiz = new Quiz(rs.getString("category"), rs.getString("name"), rs.getString("createdBy"), rs.getString("description"), rs.getString("dateCreated"), rs.getString("randomized").equals("1") ? true : false, rs.getString("multiplePage").equals("1") ? true : false, rs.getString("immediateCorrection").equals("1") ? true : false);
+				quiz = new Quiz(Integer.valueOf(rs.getString("quizId")), rs.getString("category"), rs.getString("name"), rs.getString("createdBy"), rs.getString("description"), rs.getString("dateCreated"), rs.getString("randomized").equals("1") ? true : false, rs.getString("multiplePage").equals("1") ? true : false, rs.getString("immediateCorrection").equals("1") ? true : false);
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -52,7 +54,7 @@ public class Quiz {
 		try {
 			ResultSet rs = DBConnection.newConnection().executeQuery(query);
 			while (rs.next()) {
-				quizzes.add(new Quiz(rs.getString("category"), rs.getString("name"), rs.getString("createdBy"), rs.getString("description"), rs.getString("dateCreated"), rs.getString("randomized").equals("1") ? true : false, rs.getString("multiplePage").equals("1") ? true : false, rs.getString("immediateCorrection").equals("1") ? true : false));
+				quizzes.add(new Quiz(Integer.valueOf(rs.getString("quizId")), rs.getString("category"), rs.getString("name"), rs.getString("createdBy"), rs.getString("description"), rs.getString("dateCreated"), rs.getString("randomized").equals("1") ? true : false, rs.getString("multiplePage").equals("1") ? true : false, rs.getString("immediateCorrection").equals("1") ? true : false));
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -69,7 +71,7 @@ public class Quiz {
 		try {
 			ResultSet rs = DBConnection.newConnection().executeQuery(query);
 			while (rs.next()) {
-				quizzes.add(new Quiz(rs.getString("category"), rs.getString("name"), rs.getString("createdBy"), rs.getString("description"), rs.getString("dateCreated"), rs.getString("randomized").equals("1") ? true : false, rs.getString("multiplePage").equals("1") ? true : false, rs.getString("immediateCorrection").equals("1") ? true : false));
+				quizzes.add(new Quiz(Integer.valueOf(rs.getString("quizId")), rs.getString("category"), rs.getString("name"), rs.getString("createdBy"), rs.getString("description"), rs.getString("dateCreated"), rs.getString("randomized").equals("1") ? true : false, rs.getString("multiplePage").equals("1") ? true : false, rs.getString("immediateCorrection").equals("1") ? true : false));
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -77,8 +79,8 @@ public class Quiz {
 		return quizzes;
 	}
 	
-	public static double getAverageScoreFor(String quizName) {
-		String query = "SELECT AVG(score) FROM " + DBConnection.quizTakeTable + " WHERE quizName = '" + quizName + "'";
+	public static double getAverageScoreFor(int quizId) {
+		String query = "SELECT AVG(score) FROM " + DBConnection.quizTakeTable + " WHERE quizId = '" + quizId + "'";
 		double averageScore = 0.0;
 		try {
 			ResultSet rs = DBConnection.newConnection().executeQuery(query);
@@ -91,8 +93,8 @@ public class Quiz {
 		return averageScore;
 	}
 	
-	public static void removeQuiz(String quizName) {
-		String query = "DELETE FROM " + DBConnection.quizTable + " WHERE name = '" + quizName + "'";
+	public static void removeQuiz(int quizId) {
+		String query = "DELETE FROM " + DBConnection.quizTable + " WHERE quizId = '" + quizId + "'";
 		try {
 			DBConnection.newConnection().executeUpdate(query);
 		} catch (SQLException e) {
@@ -112,8 +114,33 @@ public class Quiz {
 		}
 	}
 	
-	public static ArrayList<Question> getQuestionsForQuiz(String quizName) {
+	public static ArrayList<Question> getQuestionsForQuiz(int quizId) {
 		ArrayList<Question> questions = new ArrayList<Question>();
+		String query = "SELECT * FROM " + DBConnection.trQuestionTable + " WHERE quizId = '" + quizId + "'";
+		try {
+			DBConnection db = DBConnection.newConnection();
+			ResultSet rs = db.executeQuery(query);
+			while (rs.next()) {
+				questions.add(new TRQuestion(rs.getString("questionId"), rs.getString("question"), rs.getString("correctAnswer")));
+			}
+			query = "SELECT * FROM " + DBConnection.fibQuestionTable + " WHERE quizId = '" + quizId + "'";
+			rs = db.executeQuery(query);
+			while (rs.next()) {
+				questions.add(new FIBQuestion(rs.getString("questionId"), rs.getString("question"), rs.getString("correctAnswer")));
+			}
+			query = "SELECT * FROM " + DBConnection.mcQuestionTable + " WHERE quizId = '" + quizId + "'";
+			rs = db.executeQuery(query);
+			while (rs.next()) {
+				questions.add(new MCQuestion(rs.getString("questionId"), rs.getString("question"), rs.getString("correctAnswer"), rs.getString("icAnswerOne"), rs.getString("icAnswerTwo"), rs.getString("icAnswerThree")));
+			}
+			query = "SELECT * FROM " + DBConnection.prQuestionTable + " WHERE quizId = '" + quizId + "'";
+			rs = db.executeQuery(query);
+			while (rs.next()) {
+				questions.add(new PRQuestion(rs.getString("questionId"), rs.getString("question"), rs.getString("correctAnswer"), rs.getString("imageUrl")));
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
 		return questions;
 	}
 	

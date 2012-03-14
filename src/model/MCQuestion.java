@@ -4,14 +4,22 @@ import java.sql.SQLException;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.HashSet;
+import java.util.Set;
 
 public class MCQuestion extends Question {
 	private String prompt;
 	private String correctAnswer;
-	public MCQuestion(String questionId, String prompt, String correctAnswer) {
+	private String icOne;
+	private String icTwo;
+	private String icThree;
+	public MCQuestion(String questionId, String prompt, String correctAnswer, String icOne, String icTwo, String icThree) {
 		this.questionId = questionId;
 		this.prompt = prompt;
 		this.correctAnswer = correctAnswer;
+		this.icOne = icOne;
+		this.icTwo = icTwo;
+		this.icThree = icThree;
 	}
 	
 	@Override
@@ -23,8 +31,17 @@ public class MCQuestion extends Question {
 		return userInput.equals(correctAnswer);
 	}
 	
-	public static void createMCQuestion(int questionNumber, String prompt, String correctAnswer, String icAnswerOne, String icAnswerTwo, String icAnswerThree, String quizName) {
-		String query = "INSERT into " + DBConnection.mcQuestionTable + " (questionNumber, question, correctAnswer, icAnswerOne, icAnswerTwo, icAnswerThree, quizName) VALUES ('" + questionNumber + "', '" + prompt + "', '" + correctAnswer + "', '" + icAnswerOne + "', '" + icAnswerTwo + "', '" + icAnswerThree + "', '" + quizName + "')";
+	public String[] getAnswers() {
+		Set<String> answers = new HashSet<String>();
+		answers.add(correctAnswer);
+		answers.add(icOne);
+		answers.add(icTwo);
+		answers.add(icThree);
+		return (String[]) answers.toArray();
+	}
+	
+	public static void createMCQuestion(int questionNumber, String prompt, String correctAnswer, String icAnswerOne, String icAnswerTwo, String icAnswerThree, int quizId) {
+		String query = "INSERT into " + DBConnection.mcQuestionTable + " (questionNumber, question, correctAnswer, icAnswerOne, icAnswerTwo, icAnswerThree, quizId) VALUES ('MC_" + questionNumber + "', '" + prompt + "', '" + correctAnswer + "', '" + icAnswerOne + "', '" + icAnswerTwo + "', '" + icAnswerThree + "', '" + quizId + "')";
 		try {
 			DBConnection.newConnection().executeUpdate(query);
 		} catch (SQLException e) {

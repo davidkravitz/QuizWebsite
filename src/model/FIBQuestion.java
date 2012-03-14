@@ -21,8 +21,8 @@ public class FIBQuestion extends Question {
 		return userInput.equals(this.correctAnswer);
 	}
 
-	public static void createFIBQuestion(int questionNumber, String prompt, String correctAnswer, String quizName) {
-		String query = "INSERT into " + DBConnection.fibQuestionTable + " (questionNumber, question, correctAnswer, quizName) VALUES ('" + questionNumber + "', '" + prompt + "', '" + correctAnswer + "', '" + quizName + "')";
+	public static void createFIBQuestion(int questionNumber, String prompt, String correctAnswer, int quizId) {
+		String query = "INSERT into " + DBConnection.fibQuestionTable + " (questionNumber, question, correctAnswer, quizId) VALUES ('FIB_" + questionNumber + "', '" + prompt + "', '" + correctAnswer + "', '" + quizId + "')";
 		try {
 			DBConnection.newConnection().executeUpdate(query);
 		} catch (SQLException e) {

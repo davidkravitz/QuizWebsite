@@ -157,4 +157,18 @@ public class User {
 		}
 		return users;
 	}
+	
+	public static boolean isAdminUser(String username) {
+		String query = "select * from adminUsers where username = '" + username + "'";
+		int resultSize = 0;
+		try {
+			ResultSet rs = DBConnection.newConnection().executeQuery(query);
+			while (rs.next()) {
+				resultSize++;
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return resultSize > 0 ? true : false;
+	}
 }

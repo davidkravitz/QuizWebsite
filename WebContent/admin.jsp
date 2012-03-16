@@ -58,10 +58,12 @@
 					</table>
 				</div>
 				
+				<br />
+				
 				<div class="add-announcement-section">
 					<div class="title">Add Announcement</div>
 					<form action="MakeAnnouncement" method="POST">
-					<input type="text" name="announcement" />
+					<textarea rows="10" cols="30" name="announcement" ></textarea>
 					<input type="submit" value="Add announcement" />
 					</form>
 				</div>

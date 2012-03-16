@@ -19,7 +19,19 @@
 			<div id="left-column">
 			
 				<div class="announcement">
-				    <p>Welcome to QuizWebsite! Take a quiz featured below or search for one up top!</p>
+				    <div class="title">Announcements</div>
+				    <%
+				    	ArrayList<Announcement>  announcements = Announcement.getAnnouncements(0);
+				    	for (Announcement announcement : announcements) {
+				    		out.println("<div class=\"announcement\">");
+				    		out.println("<div class=\"title\">");
+				    		out.println(announcement.title);
+				    		out.println("</div>");
+				    		out.println("<div class=\"message\">");
+				    		out.println(announcement.message);
+				    		out.println("</div></div>");
+				    	}
+				     %>
 				</div>
 				
 				<div class="homepage-section">

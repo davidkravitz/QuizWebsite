@@ -149,8 +149,20 @@ public class Quiz {
 		return quizzes;
 	}
 	
-	public static ArrayList<Quiz> getSimilarQuizName(String quizName) {
+	public static ArrayList<Quiz> getSimilarQuizName(String quizName, int limit) {
+		String query = "SELECT * FROM " + DBConnection.quizTable + " WHERE name LIKE '" + quizName + "' " + " ORDER BY dateCreated DESC";
+		if (limit > 0) {
+			query += " LIMIT " + limit;
+		}
 		ArrayList<Quiz> quizzes = new ArrayList<Quiz>();
+		try {
+			ResultSet rs = DBConnection.newConnection().executeQuery(query);
+			while (rs.next()) {
+				quizzes.add(new Quiz(Integer.valueOf(rs.getString("quizId")), rs.getString("category"), rs.getString("name"), rs.getString("createdBy"), rs.getString("description"), rs.getString("dateCreated"), rs.getString("randomized").equals("1") ? true : false, rs.getString("multiplePage").equals("1") ? true : false, rs.getString("immediateCorrection").equals("1") ? true : false));
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
 		return quizzes;
 	}
 }

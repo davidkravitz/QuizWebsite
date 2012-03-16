@@ -25,7 +25,7 @@ public class Message {
 		DateFormat dateFormat = new SimpleDateFormat("yyyy:MM:dd HH:mm:ss");
 		Date date = new Date();
 		String stringDate = dateFormat.format(date);
-		String query = "INSERT into " + DBConnection.messageTable + " (username, recipientName, message, title, dateCreated) VALUES ('" + username + "', '" + recipientName + "', '" + message + "', " + title + "', '" + stringDate + "')";
+		String query = "INSERT into " + DBConnection.messageTable + " (username, recipientName, message, title, dateCreated) VALUES ('" + username + "', '" + recipientName + "', '" + message + "', '" + title + "', '" + stringDate + "')";
 		try {
 			DBConnection.newConnection().executeUpdate(query);
 		} catch (SQLException e) {

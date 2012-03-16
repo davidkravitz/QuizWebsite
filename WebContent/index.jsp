@@ -75,9 +75,9 @@
 						
 						// Stub filled with dummy quizTakes
 						ArrayList<QuizTake> quizTakes = new ArrayList<QuizTake>();
-						quizTakes.add(new QuizTake("quizName", "username", 0, "dataTaken", "timeSpent"));
-						quizTakes.add(new QuizTake("quizName", "username", 0, "dataTaken", "timeSpent"));
-						quizTakes.add(new QuizTake("quizName", "username", 0, "dataTaken", "timeSpent"));
+						quizTakes.add(new QuizTake(1, "username", 0, 0, "dataTaken", "timeSpent"));
+						quizTakes.add(new QuizTake(1, "username", 0, 0, "dataTaken", "timeSpent"));
+						quizTakes.add(new QuizTake(1, "username", 0, 0, "dataTaken", "timeSpent"));
 						
 						for (QuizTake quizTake : quizTakes) {
 							out.println("<div class=\"quiz\">");
@@ -95,7 +95,7 @@
 						ArrayList<QuizTake> quizTakes = QuizTake.getTakenQuizzesForUser(username); */
 						
 						// Stub filled with dummy Users
-						quizTakes.add(new QuizTake("quizName", "username", 0, "dataTaken", "timeSpent"));
+						quizTakes.add(new QuizTake(1, "username", 0, 0, "dataTaken", "timeSpent"));
 						String username = "david";
 						for (QuizTake quizTake : quizTakes) {
 							out.println("<div class=\"quiz\">");

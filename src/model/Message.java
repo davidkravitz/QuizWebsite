@@ -59,7 +59,7 @@ public class Message {
 		try {
 			ResultSet rs = DBConnection.newConnection().executeQuery(query);
 			while (rs.next()) {
-				messages.add(new Message(rs.getString("username"), rs.getString("recipientName"), rs.getString("message"), rs.getString("text"), rs.getString("dateCreated")));
+				messages.add(new Message(rs.getString("username"), rs.getString("recipientName"), rs.getString("message"), rs.getString("title"), rs.getString("dateCreated")));
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();

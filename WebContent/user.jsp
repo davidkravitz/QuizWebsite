@@ -41,8 +41,8 @@
 				<div class="profile-section">
 					<div class="title">Quizzes Made</div>
 					<%
-						int numQuizzes = 5;
-						/* ArrayList<Quiz> quizzes = Quiz.getQuizzes(numQuizzes); */
+						String username = request.getParameter("username");
+						/* ArrayList<Quiz> quizzes = Quiz.getQuizzesBy(username, 0); */
 
 						// Stub filled with dummy quizzes
 						ArrayList<Quiz> quizzes = new ArrayList<Quiz>();
@@ -66,8 +66,8 @@
 				<div class="profile-section">
 					<div class="title">Quizzes Taken</div>
 					<%
-						numQuizzes = 5;
-						/* ArrayList<Quiz> quizzes = Quiz.getQuizzes(numQuizzes); */
+						username = request.getParameter("username");
+						/* ArrayList<QuizTake> quizTakes = QuizTakes.getTakenQuizzesForUser(username); */
 
 						// Stub filled with dummy quizzes
 						quizzes = new ArrayList<Quiz>();
@@ -98,8 +98,8 @@
 						<table class="photo-list">
 							<tbody>
 								<%
-									String username = request.getParameter("username");
-									ArrayList<User> friends = User.getFriendsFor(username, 16);
+									username = request.getParameter("username");
+									ArrayList<User> friends = User.getFriendsFor(username, 0);
 									int numFriends = friends.size();
 									numFriends = 20;
 									int numFriendsPerRow = 8;

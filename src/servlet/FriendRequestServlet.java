@@ -25,7 +25,8 @@ public class FriendRequestServlet extends HttpServlet {
 		String friend = request.getParameter("username");
 		String currentUser = (String) request.getSession().getAttribute("username");
 		FriendRequest.acceptFriendRequest(friend, currentUser);
-		System.out.println("Accenpted the friend request: " + currentUser + " friended " + friend);
+		request.setAttribute("successMessage", "Your friend request has successfully been sent.");
+		request.getRequestDispatcher("message-sent.jsp").forward(request, response);
 		
 	}
 

@@ -31,8 +31,8 @@ public class SendMessageServlet extends HttpServlet {
 		String recipientName = request.getParameter("recipientName");
 		String message = request.getParameter("message");
 		model.Message.sendMessage(username, recipientName, message, "");
-		System.out.println(username + " sent a message to " + recipientName);
-		System.out.println("Message: " + message);
+		request.setAttribute("successMessage", "Your message has successfully been sent.");
+		request.getRequestDispatcher("message-sent.jsp").forward(request, response);
 	}
 
 }

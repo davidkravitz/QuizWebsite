@@ -30,10 +30,10 @@
 						
 						// Stub filled with dummy quizzes
 						ArrayList<Quiz> quizzes = new ArrayList<Quiz>();
-						quizzes.add(new Quiz("category", "World War II", "createdBy", "description", "dateCreated", false, false, false));
+						/*quizzes.add(new Quiz("category", "World War II", "createdBy", "description", "dateCreated", false, false, false));
 						quizzes.add(new Quiz("category", "Algebra I", "createdBy", "description", "dateCreated", false, false, false));
 						quizzes.add(new Quiz("category", "Political Philosophy", "createdBy", "description", "dateCreated", false, false, false));
-						
+						*/
 						for (Quiz quiz : quizzes) {
 							out.println("<div class=\"quiz\">");
 							out.println("<a href=\"" + quiz.hashCode() + "\">" + quiz.name + "</a>");
@@ -75,13 +75,13 @@
 						
 						// Stub filled with dummy quizTakes
 						ArrayList<QuizTake> quizTakes = new ArrayList<QuizTake>();
-						quizTakes.add(new QuizTake("quizName", "username", 0, "dataTaken", "timeSpent"));
-						quizTakes.add(new QuizTake("quizName", "username", 0, "dataTaken", "timeSpent"));
-						quizTakes.add(new QuizTake("quizName", "username", 0, "dataTaken", "timeSpent"));
+						//quizTakes.add(new QuizTake("quizName", "username", 0, "dataTaken", "timeSpent"));
+						//quizTakes.add(new QuizTake("quizName", "username", 0, "dataTaken", "timeSpent"));
+						//quizTakes.add(new QuizTake("quizName", "username", 0, "dataTaken", "timeSpent"));
 						
 						for (QuizTake quizTake : quizTakes) {
 							out.println("<div class=\"quiz\">");
-							out.println("<a href=\"" + quizTake.quizName + "\">" + quizTake.quizName + "</a>");
+							//out.println("<a href=\"" + quizTake.quizName + "\">" + quizTake.quizName + "</a>");
 							out.println("</div>");
 						}
 					%>

@@ -19,7 +19,7 @@
 	<h3>
 		Current Quiz:	<%=curr.name%></h3>
 	<div id="questionCreation">
-		<form name="questionSubmit">
+		<form name="questionSubmit"  method="post" action="AddQuestionServlet" >
 			Select question type: <br/>
 			<select id="typeSelect" name="questionType">
 				<option value="MC">Multiple Choice</option>
@@ -34,7 +34,7 @@
 			<div id="addAnswer">
 			</div>
 			
-			<input type="submit" value="Add Question">
+			<input type="submit"value="Add Question">
 		</form>
 	</div>
 

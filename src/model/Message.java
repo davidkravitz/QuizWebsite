@@ -51,7 +51,7 @@ public class Message {
 	}
 	
 	public static ArrayList<Message> getReceivedMessagesFor(String username, int limit) {
-		String query = "SELECT * FROM " + DBConnection.friendsTable + " WHERE recipientName = '" + username + "'";
+		String query = "SELECT * FROM " + DBConnection.messageTable + " WHERE recipientName = '" + username + "'";
 		if (limit > 0) {
 			query += " LIMIT " + limit;
 		}

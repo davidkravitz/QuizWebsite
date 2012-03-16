@@ -21,6 +21,7 @@ public class QuizTake {
 		this.score = score;
 		this.dateTaken = dateTaken;
 		this.timeSpent = timeSpent;
+		this.quizId = quizId;
 	}
 	
 	public static ArrayList<QuizTake> getTakenQuizzesForUser(String username) {

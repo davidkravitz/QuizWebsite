@@ -25,16 +25,15 @@
 					<div class="profile-info">
 						<div class="title profile-name"><%=request.getParameter("username")%></div>
 						<form action="FriendRequestServlet" method="post">
-							<input type="hidden" name="username"
-								value="<%=request.getParameter("username")%>"> <input
-								class="button profile-button" type="submit" value="Add Friend">
+							<input type="hidden" name="friendName"
+								value="<%=request.getParameter("username")%>">
+							<input class="button profile-button" type="submit" value="Add Friend">
 						</form>
 					</div>
 					<form action="SendMessageServlet" method="post" class="message-form">
-						<textarea name="Message"">Send <%=request.getParameter("username")%> a message.</textarea>
-						<input type="hidden" name="username"
-							value="<%=request.getParameter("username")%>"> <input
-							class="button profile-button" type="submit" value="Send">
+						<textarea name="message"">Send <%=request.getParameter("username")%> a message.</textarea>
+						<input type="hidden" name="recipientName" value="<%=request.getParameter("username")%>"> 
+						<input class="button profile-button" type="submit" value="Send">
 					</form>
 
 				</div>

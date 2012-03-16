@@ -132,12 +132,24 @@ public class Quiz {
 		return questions;
 	}
 	
-	public static ArrayList<Quiz> getSimilarQuizName(String quizName) {
+	public static ArrayList<Quiz> getPopularQuizzes(int limit) {
+		String query = "select quizzes.quizId, quizzes.name, quizzes.category, quizzes.description, quizzes.createdBy, quizzes.dateCreated, quizzes.randomized, quizzes.multiplePage, quizzes.immediateCorrection from quizzes inner join (select quizId, count(quizId) as count from quizTakes group by quizId order by count DESC) popularQuiz on quizzes.quizId = popularQuiz.quizId";
+		if (limit > 0) {
+			query += " LIMIT " + limit;
+		}
 		ArrayList<Quiz> quizzes = new ArrayList<Quiz>();
+		try {
+			ResultSet rs = DBConnection.newConnection().executeQuery(query);
+			while (rs.next()) {
+				quizzes.add(new Quiz(Integer.valueOf(rs.getString("quizId")), rs.getString("category"), rs.getString("name"), rs.getString("createdBy"), rs.getString("description"), rs.getString("dateCreated"), rs.getString("randomized").equals("1") ? true : false, rs.getString("multiplePage").equals("1") ? true : false, rs.getString("immediateCorrection").equals("1") ? true : false));
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
 		return quizzes;
 	}
 	
-	public static ArrayList<Quiz> getRecentQuizzes(int limit) {
+	public static ArrayList<Quiz> getSimilarQuizName(String quizName) {
 		ArrayList<Quiz> quizzes = new ArrayList<Quiz>();
 		return quizzes;
 	}

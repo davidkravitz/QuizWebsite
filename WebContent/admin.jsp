@@ -60,72 +60,13 @@
 				
 				<div class="add-announcement-section">
 					<div class="title">Add Announcement</div>
-					
-				</div>
-				
-				<div class="homepage-section">
-					<div class="title">Quizzes You've Made</div>
-					<%
-		/* 				String username = (String) session.getAttribute("username");
-						quizzes = Quiz.getQuizzesBy(username, numQuizzes); */
-						for (Quiz quiz : quizzes) {
-							out.println("<div class=\"quiz\">");
-							out.println("<a href=\"" + quiz.hashCode() + "\">" + quiz.name + "</a>");
-							out.println("</div>");
-						}
-					%>
-				</div>
-				
-				<div class="homepage-section">
-					<div class="title">Quizzes You've Taken</div>
-					<%
-		/* 				String username = (String) session.getAttribute("username");
-						ArrayList<QuizTake> quizTakes = QuizTake.getTakenQuizzesForUser(username); */
-						
-						// Stub filled with dummy quizTakes
-						ArrayList<QuizTake> quizTakes = new ArrayList<QuizTake>();
-						quizTakes.add(new QuizTake(1, "username", 0, 0, "dataTaken", "timeSpent"));
-						quizTakes.add(new QuizTake(1, "username", 0, 0, "dataTaken", "timeSpent"));
-						quizTakes.add(new QuizTake(1, "username", 0, 0, "dataTaken", "timeSpent"));
-						
-						for (QuizTake quizTake : quizTakes) {
-							out.println("<div class=\"quiz\">");
-							out.println("<a href=\"" + quizTake.quizName + "\">" + quizTake.quizName + "</a>");
-							out.println("</div>");
-						}
-					%>
+					<form action="MakeAnnouncement" method="POST">
+					<input type="text" name="announcement" />
+					<input type="submit" value="Add announcement" />
+					</form>
 				</div>
 				
 				
-				<div class="homepage-section">
-					<div class="title">Your Friends' Recent Activity</div>
-										<%
-		/* 				String username = (String) session.getAttribute("username");
-						ArrayList<QuizTake> quizTakes = QuizTake.getTakenQuizzesForUser(username); */
-						
-						// Stub filled with dummy Users
-						quizTakes.add(new QuizTake(1, "username", 0, 0, "dataTaken", "timeSpent"));
-						String username = "david";
-						for (QuizTake quizTake : quizTakes) {
-							out.println("<div class=\"quiz\">");
-							out.println("<a href=\"user.jsp?username=" + username + "\">" + username + "</a>");
-							out.println("</div>");
-						}
-					%>
-				</div>
-				
-			</div>
-			
-			<div id="right-column">
-				<div class="announcement">
-				    <p>Here are your achievements:</p>
-				</div>
-				<div class="announcement">
-				    <p>Here are your messages:</p>
-				</div>
-			</div>
-		</div>
-        
         <div id="footer">
             <p>QuizWebsite 2012</p>
         </div>

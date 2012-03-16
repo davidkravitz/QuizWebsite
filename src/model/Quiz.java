@@ -90,16 +90,28 @@ public class Quiz {
 		}
 	}
 	
-	public static void createQuiz(String quizName, String category, String description, String createdBy, boolean randomized, boolean multiplePage, boolean immediateCorrection) {
+	public static int createQuiz(String quizName, String category, String description, String createdBy, boolean randomized, boolean multiplePage, boolean immediateCorrection) {
+		String query = "select max(quizId) as maxId from quizzes";
+		int maxId = 1;
+		try {
+			ResultSet rs = DBConnection.newConnection().executeQuery(query);
+			while (rs.next()) {
+				if (!rs.getString("maxId").equals("NULL"))
+					maxId = Integer.valueOf(rs.getString("maxId")) + 1;
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
 		DateFormat dateFormat = new SimpleDateFormat("yyyy:MM:dd HH:mm:ss");
 		Date date = new Date();
 		String stringDate = dateFormat.format(date);
-		String query = "INSERT into " + DBConnection.quizTable + " (name, category, description, createdBy, dateCreated, randomized, multiplePage, immediateCorrection) VALUES ('" + quizName + "', '" + category + "', '" + description + "', '" + createdBy + "', '" + stringDate + "', '" + (randomized ? 1 : 0) + "', '" + (multiplePage ? 1 : 0) + "', '" + (immediateCorrection ? 1 : 0) + "')";
+		query = "INSERT into " + DBConnection.quizTable + " (quizId, name, category, description, createdBy, dateCreated, randomized, multiplePage, immediateCorrection) VALUES ('" + maxId + "', '" + quizName + "', '" + category + "', '" + description + "', '" + createdBy + "', '" + stringDate + "', '" + (randomized ? 1 : 0) + "', '" + (multiplePage ? 1 : 0) + "', '" + (immediateCorrection ? 1 : 0) + "')";
 		try {
 			DBConnection.newConnection().executeUpdate(query);
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
+		return maxId;
 	}
 	
 	public static ArrayList<Question> getQuestionsForQuiz(int quizId) {

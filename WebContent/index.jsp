@@ -35,8 +35,10 @@
 						quizzes.add(new Quiz("category", "Political Philosophy", "createdBy", "description", "dateCreated", false, false, false));
 						*/
 						for (Quiz quiz : quizzes) {
-							out.println("<div class=\"quiz\">");
-							out.println("<a href=\"" + quiz.hashCode() + "\">" + quiz.name + "</a>");
+							out.println("<div class=\"challenge-request\">");
+							out.println("<a href=\"quiz-summary.jsp?quiz=" + quiz.quizId + "\">");
+							out.println(quiz.name);
+							out.println("</a>");
 							out.println("</div>");
 						}
 					%>

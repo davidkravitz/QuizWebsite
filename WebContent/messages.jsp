@@ -50,7 +50,7 @@
 							out.println("<div class=\"challenge\">");
 							out.println(challenge.username + " has challenged you to take a quiz.");
 							out.println("<div class=\"challenge-request\">");
-							out.println("<a href=\"quiz.jsp?id=" + challenge.quizId + "\">");
+							out.println("<a href=\"quiz-summary.jsp?quiz=" + challenge.quizId + "\">");
 							out.println("Take " + challenge.quizName + "!");
 							out.println("</a>");
 							out.println("</div>");

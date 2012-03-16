@@ -14,6 +14,7 @@ public class QuizTake {
 	public String timeSpent;
 	public int quizId;
 	public int qtId;
+	public String quizName;
 	
 	public QuizTake(int qtId, String username, int quizId, int score, String dateTaken, String timeSpent) {
 		this.qtId = qtId;
@@ -102,14 +103,22 @@ public class QuizTake {
 		return 1;
 	}
 	
-	public static ArrayList<Quiz> getPopularQuizzes() {
-		ArrayList<Quiz> quizzes = new ArrayList<Quiz>();
-		
-		return quizzes;
-	}
-	
-	public static ArrayList<Quiz> getFriendsRecentQuizzes() {
-		ArrayList<Quiz> quizzes = new ArrayList<Quiz>();
-		return quizzes;
+	public static ArrayList<QuizTake> getFriendsRecentQuizzes(String username, int limit) {
+		String query = "select quizzes.quizId, quizzes.name, friendTakes.friendName, friendTakes.score, friendTakes.dateTaken, friendTakes.timeSpent from quizzes inner join (select * from quizTakes inner join (select friendName from friends where username = '" + username + "') friends on quizTakes.username = friends.friendName) friendTakes on friendTakes.quizId = quizzes.quizId";
+		if (limit > 0) {
+			query += " LIMIT " + limit;
+		}
+		ArrayList<QuizTake> quizTakes = new ArrayList<QuizTake>();
+		try {
+			ResultSet rs = DBConnection.newConnection().executeQuery(query);
+			while (rs.next()) {
+				QuizTake quizTake = new QuizTake(0, rs.getString("friendName"), Integer.valueOf(rs.getString("quizId")), Integer.valueOf(rs.getString("score")), rs.getString("dateTaken"), rs.getString("timeSpent"));
+				quizTake.quizName = rs.getString("name");
+				quizTakes.add(quizTake);
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return quizTakes;
 	}
 }

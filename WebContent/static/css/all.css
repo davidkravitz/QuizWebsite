@@ -12,6 +12,10 @@ a,a:visited {
     color: #19558D; /* Color for all the links */
 }
 
+a img {
+	border:none; 
+}
+
 a:hover {
     text-decoration: underline;
 }
@@ -280,7 +284,6 @@ item page is the name of the item.*/
     color:#222;
     font-size: 16px;
     font-weight: bold;
-	width:auto;
     overflow-x: hidden;
     border: none;
     margin-bottom: 5px;

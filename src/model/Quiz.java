@@ -90,16 +90,28 @@ public class Quiz {
 		}
 	}
 	
-	public static void createQuiz(String quizName, String category, String description, String createdBy, boolean randomized, boolean multiplePage, boolean immediateCorrection) {
+	public static int createQuiz(String quizName, String category, String description, String createdBy, boolean randomized, boolean multiplePage, boolean immediateCorrection) {
+		String query = "select max(quizId) as maxId from quizzes";
+		int maxId = 1;
+		try {
+			ResultSet rs = DBConnection.newConnection().executeQuery(query);
+			while (rs.next()) {
+				if (!rs.getString("maxId").equals("NULL"))
+					maxId = Integer.valueOf(rs.getString("maxId")) + 1;
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
 		DateFormat dateFormat = new SimpleDateFormat("yyyy:MM:dd HH:mm:ss");
 		Date date = new Date();
 		String stringDate = dateFormat.format(date);
-		String query = "INSERT into " + DBConnection.quizTable + " (name, category, description, createdBy, dateCreated, randomized, multiplePage, immediateCorrection) VALUES ('" + quizName + "', '" + category + "', '" + description + "', '" + createdBy + "', '" + stringDate + "', '" + (randomized ? 1 : 0) + "', '" + (multiplePage ? 1 : 0) + "', '" + (immediateCorrection ? 1 : 0) + "')";
+		query = "INSERT into " + DBConnection.quizTable + " (quizId, name, category, description, createdBy, dateCreated, randomized, multiplePage, immediateCorrection) VALUES ('" + maxId + "', '" + quizName + "', '" + category + "', '" + description + "', '" + createdBy + "', '" + stringDate + "', '" + (randomized ? 1 : 0) + "', '" + (multiplePage ? 1 : 0) + "', '" + (immediateCorrection ? 1 : 0) + "')";
 		try {
 			DBConnection.newConnection().executeUpdate(query);
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
+		return maxId;
 	}
 	
 	public static ArrayList<Question> getQuestionsForQuiz(int quizId) {
@@ -132,13 +144,37 @@ public class Quiz {
 		return questions;
 	}
 	
-	public static ArrayList<Quiz> getSimilarQuizName(String quizName) {
+	public static ArrayList<Quiz> getPopularQuizzes(int limit) {
+		String query = "select quizzes.quizId, quizzes.name, quizzes.category, quizzes.description, quizzes.createdBy, quizzes.dateCreated, quizzes.randomized, quizzes.multiplePage, quizzes.immediateCorrection from quizzes inner join (select quizId, count(quizId) as count from quizTakes group by quizId order by count DESC) popularQuiz on quizzes.quizId = popularQuiz.quizId";
+		if (limit > 0) {
+			query += " LIMIT " + limit;
+		}
 		ArrayList<Quiz> quizzes = new ArrayList<Quiz>();
+		try {
+			ResultSet rs = DBConnection.newConnection().executeQuery(query);
+			while (rs.next()) {
+				quizzes.add(new Quiz(Integer.valueOf(rs.getString("quizId")), rs.getString("category"), rs.getString("name"), rs.getString("createdBy"), rs.getString("description"), rs.getString("dateCreated"), rs.getString("randomized").equals("1") ? true : false, rs.getString("multiplePage").equals("1") ? true : false, rs.getString("immediateCorrection").equals("1") ? true : false));
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
 		return quizzes;
 	}
 	
-	public static ArrayList<Quiz> getRecentQuizzes(int limit) {
+	public static ArrayList<Quiz> getSimilarQuizName(String quizName, int limit) {
+		String query = "SELECT * FROM " + DBConnection.quizTable + " WHERE name LIKE '" + quizName + "' " + " ORDER BY dateCreated DESC";
+		if (limit > 0) {
+			query += " LIMIT " + limit;
+		}
 		ArrayList<Quiz> quizzes = new ArrayList<Quiz>();
+		try {
+			ResultSet rs = DBConnection.newConnection().executeQuery(query);
+			while (rs.next()) {
+				quizzes.add(new Quiz(Integer.valueOf(rs.getString("quizId")), rs.getString("category"), rs.getString("name"), rs.getString("createdBy"), rs.getString("description"), rs.getString("dateCreated"), rs.getString("randomized").equals("1") ? true : false, rs.getString("multiplePage").equals("1") ? true : false, rs.getString("immediateCorrection").equals("1") ? true : false));
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
 		return quizzes;
 	}
 }

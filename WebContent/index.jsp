@@ -78,6 +78,7 @@
 						//quizTakes.add(new QuizTake("quizName", "username", 0, "dataTaken", "timeSpent"));
 						//quizTakes.add(new QuizTake("quizName", "username", 0, "dataTaken", "timeSpent"));
 						//quizTakes.add(new QuizTake("quizName", "username", 0, "dataTaken", "timeSpent"));
+
 						
 						for (QuizTake quizTake : quizTakes) {
 							out.println("<div class=\"quiz\">");
@@ -89,7 +90,20 @@
 				
 				
 				<div class="homepage-section">
-				<div class="title">Your Friends' Recent Activity</div>
+					<div class="title">Your Friends' Recent Activity</div>
+										<%
+		/* 				String username = (String) session.getAttribute("username");
+						ArrayList<QuizTake> quizTakes = QuizTake.getTakenQuizzesForUser(username); */
+						
+						// Stub filled with dummy Users
+						quizTakes.add(new QuizTake(1, "username", 0, 0, "dataTaken", "timeSpent"));
+						String username = "david";
+						for (QuizTake quizTake : quizTakes) {
+							out.println("<div class=\"quiz\">");
+							out.println("<a href=\"user.jsp?username=" + username + "\">" + username + "</a>");
+							out.println("</div>");
+						}
+					%>
 				</div>
 				
 			</div>

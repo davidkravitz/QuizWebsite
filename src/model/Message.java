@@ -25,7 +25,7 @@ public class Message {
 		DateFormat dateFormat = new SimpleDateFormat("yyyy:MM:dd HH:mm:ss");
 		Date date = new Date();
 		String stringDate = dateFormat.format(date);
-		String query = "INSERT into " + DBConnection.messageTable + " (username, recipientName, message, title, dateCreated) VALUES ('" + username + "', '" + recipientName + "', '" + message + "', " + title + "', '" + stringDate + "')";
+		String query = "INSERT into " + DBConnection.messageTable + " (username, recipientName, message, title, dateCreated) VALUES ('" + username + "', '" + recipientName + "', '" + message + "', '" + title + "', '" + stringDate + "')";
 		try {
 			DBConnection.newConnection().executeUpdate(query);
 		} catch (SQLException e) {
@@ -42,7 +42,7 @@ public class Message {
 		try {
 			ResultSet rs = DBConnection.newConnection().executeQuery(query);
 			while (rs.next()) {
-				messages.add(new Message(rs.getString("username"), rs.getString("recipientName"), rs.getString("message"), rs.getString("text"), rs.getString("dateCreated")));
+				messages.add(new Message(rs.getString("username"), rs.getString("recipientName"), rs.getString("message"), rs.getString("title"), rs.getString("dateCreated")));
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -51,7 +51,7 @@ public class Message {
 	}
 	
 	public static ArrayList<Message> getReceivedMessagesFor(String username, int limit) {
-		String query = "SELECT * FROM " + DBConnection.friendsTable + " WHERE recipientName = '" + username + "'";
+		String query = "SELECT * FROM " + DBConnection.messageTable + " WHERE recipientName = '" + username + "'";
 		if (limit > 0) {
 			query += " LIMIT " + limit;
 		}
@@ -59,7 +59,7 @@ public class Message {
 		try {
 			ResultSet rs = DBConnection.newConnection().executeQuery(query);
 			while (rs.next()) {
-				messages.add(new Message(rs.getString("username"), rs.getString("recipientName"), rs.getString("message"), rs.getString("text"), rs.getString("dateCreated")));
+				messages.add(new Message(rs.getString("username"), rs.getString("recipientName"), rs.getString("message"), rs.getString("title"), rs.getString("dateCreated")));
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();

@@ -1,0 +1,153 @@
+@CHARSET "UTF-8";
+
+.profile-list {
+/*  margin-left:8px;*/
+}
+
+.small-listing-image {
+	width:50px;
+	height:50px;
+	padding:1px;
+}
+
+.small-listing-image.medium-listing-image{
+    width: 84px;
+    height: 84px;
+    padding: 1px;
+}
+
+.profile-header {
+    margin-bottom: 10px;
+    float: left;
+}
+
+.profile-section {
+	margin-top: 14px;
+	float: left;
+	width: 640px;	
+}
+
+.profile-mini-image {
+    width:25px;
+    height:25px;
+    padding:1px;
+    cursor:pointer;
+}
+
+.profile-image {
+    float: left;
+}
+
+.profile-image img {
+	width:50px;
+	height:50px;
+}
+
+.list-more {
+	width:48px;
+	height:48px;
+	padding:1px;
+	background:#E3F1FA;
+	color:#333;
+	border: 1px solid #CCC;
+	text-align:center;
+}
+
+.more-tooltip {
+	color:#ddd;
+	font-size:12px;
+	visibility:hidden;
+	padding:5px;
+	margin-top:5px;
+	position:absolute;
+	background-color:#444;
+	z-index:200;
+	cursor:default;
+	min-width:50px;
+	text-align:center;
+	min-height:30px;
+}
+
+.hidden-image {
+	visibility:hidden;
+}
+
+.follow-button{
+    float:left;
+    padding: 0px;
+    margin-left: 10px;
+}
+
+.profile {
+    width: 630px;
+    margin-bottom: 20px;
+    margin-top: 7px;
+    margin-left: 6px;
+}
+
+.profile-info {
+    float: left;
+    margin-left: 10px;
+    width: 570px;
+}
+
+.profile-name{
+    float: left;
+    width: 560px;
+}
+
+.profile-bio {
+    float: left;
+    clear: left;
+    width: 480px;
+}
+
+.profile-button{
+    margin: 4px;
+}
+    
+.photo-list {
+	max-width:270px;
+	max-height:200px;
+}
+
+.photo-list-title {
+	font-size:13px;
+	font-weight:bold;
+	font-family: 'Helvetica Neue', Helvetica;
+	margin-bottom:3px;
+	padding-left:3px;
+}
+
+.profile-sidebar {
+	float:right;
+    margin-top: 5px;
+    width: 248px;
+}
+
+.profile-sidebar-item {
+	width:234px;
+	margin-bottom:10px;
+}
+
+.profile-sidebar-title {
+	font-weight:bold;
+}
+
+.profile-sidebar-text {
+	font-size:13px;
+	font-weight:normal;
+	font-family: 'Helvetica Neue', Helvetica;
+	padding:3px 0px 3px 0px;
+}
+
+.message-form {
+	clear: both;
+	padding-top: 15px;
+}
+
+.message-form textarea {
+	width: 300px;
+	height: 75px;
+}
+

@@ -31,7 +31,7 @@ public class User {
 		try {
 			ResultSet rs = DBConnection.newConnection().executeQuery(query);
 			while (rs.next()) {
-				friends.add(new User(rs.getString("friendName"), "", "", "", ""));
+				friends.add(new User(rs.getString("username"), rs.getString("dateJoined"), rs.getString("firstName"), rs.getString("lastName"), rs.getString("imageUrl")));
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -141,8 +141,34 @@ public class User {
 		}
 	}
 	
-	public static ArrayList<User> getSimilarUsernames(String username) {
+	public static ArrayList<User> getSimilarUsernames(String username, int limit) {
+		String query = "SELECT * FROM " + DBConnection.userTable + " WHERE username LIKE '" + username + "' " + " ORDER BY dateCreated DESC";
+		if (limit > 0) {
+			query += " LIMIT " + limit;
+		}
 		ArrayList<User> users = new ArrayList<User>();
+		try {
+			ResultSet rs = DBConnection.newConnection().executeQuery(query);
+			while (rs.next()) {
+				users.add(new User(rs.getString("username"), rs.getString("dateJoined"), rs.getString("firstName"), rs.getString("lastName"), rs.getString("imageUrl")));
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
 		return users;
+	}
+	
+	public static boolean isAdminUser(String username) {
+		String query = "select * from adminUsers where username = '" + username + "'";
+		int resultSize = 0;
+		try {
+			ResultSet rs = DBConnection.newConnection().executeQuery(query);
+			while (rs.next()) {
+				resultSize++;
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return resultSize > 0 ? true : false;
 	}
 }

@@ -25,7 +25,6 @@
 					<th>quizId</th>
 					<th>Message</th>
 					<th>Type</th>
-					<th>Description</th>
 					</tr>
 					<%
 						int numQuizzes = 5;
@@ -42,14 +41,16 @@
 							out.println("<input type=\"submit\" value=\"Delete quiz\" /></form>");
 							out.println("</td>");
 							out.println("<td>");
+							out.println(quizReport.username);
 							out.println("</td>");
 							out.println("<td>");
+							out.println("<a href=\"" + quizReport.quizId + "\">See Quiz</a>");
 							out.println("</td>");
 							out.println("<td>");
+							out.println(quizReport.message);
 							out.println("</td>");
 							out.println("<td>");
-							out.println("</td>");
-							out.println("<td>");
+							out.println(quizReport.type);
 							out.println("</td>");
 							out.println("</tr>");
 						}
@@ -57,16 +58,9 @@
 					</table>
 				</div>
 				
-				<div class="homepage-section">
-					<div class="title">Recently Created Quizzes</div>
-					<%
-						/* ArrayList<Quiz> quizzes = Quiz.getQuizzes(numQuizzes); */
-						for (Quiz quiz : quizzes) {
-							out.println("<div class=\"quiz\">");
-							out.println("<a href=\"" + quiz.hashCode() + "\">" + quiz.name + "</a>");
-							out.println("</div>");
-						}
-					%>
+				<div class="add-announcement-section">
+					<div class="title">Add Announcement</div>
+					
 				</div>
 				
 				<div class="homepage-section">

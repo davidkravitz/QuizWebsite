@@ -12,9 +12,10 @@ public class QuizTake {
 	public int score;
 	public String dateTaken;
 	public String timeSpent;
+	public int quizId;
 	public int qtId;
 	
-	public QuizTake(int qtId, String username, int score, String dateTaken, String timeSpent) {
+	public QuizTake(int qtId, String username, int quizId, int score, String dateTaken, String timeSpent) {
 		this.qtId = qtId;
 		this.username = username;
 		this.score = score;
@@ -28,7 +29,7 @@ public class QuizTake {
 		try {
 			ResultSet rs = DBConnection.newConnection().executeQuery(query);
 			while (rs.next()) {
-				quizTakes.add(new QuizTake(Integer.valueOf(rs.getString("qtId")), rs.getString("username"), Integer.valueOf(rs.getString("score")), rs.getString("dateTaken"), rs.getString("timeSpent")));
+				quizTakes.add(new QuizTake(Integer.valueOf(rs.getString("qtId")), rs.getString("username"), Integer.valueOf(rs.getString("quizId")), Integer.valueOf(rs.getString("score")), rs.getString("dateTaken"), rs.getString("timeSpent")));
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -57,7 +58,7 @@ public class QuizTake {
 		try {
 			ResultSet rs = DBConnection.newConnection().executeQuery(query);
 			while (rs.next()) {
-				quizTakes.add(new QuizTake(Integer.valueOf(rs.getString("qtId")), rs.getString("username"), Integer.valueOf(rs.getString("score")), rs.getString("dateTaken"), rs.getString("timeSpent")));
+				quizTakes.add(new QuizTake(Integer.valueOf(rs.getString("qtId")), rs.getString("username"), Integer.valueOf(rs.getString("quizId")), Integer.valueOf(rs.getString("score")), rs.getString("dateTaken"), rs.getString("timeSpent")));
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -74,7 +75,7 @@ public class QuizTake {
 		try {
 			ResultSet rs = DBConnection.newConnection().executeQuery(query);
 			while (rs.next()) {
-				quizTakes.add(new QuizTake(Integer.valueOf(rs.getString("qtId")), rs.getString("username"), Integer.valueOf(rs.getString("score")), rs.getString("dateTaken"), rs.getString("timeSpent")));
+				quizTakes.add(new QuizTake(Integer.valueOf(rs.getString("qtId")), rs.getString("username"), Integer.valueOf(rs.getString("quizId")), Integer.valueOf(rs.getString("score")), rs.getString("dateTaken"), rs.getString("timeSpent")));
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -98,5 +99,16 @@ public class QuizTake {
 	
 	public static int getNumTakersFor(String quizName) {
 		return 1;
+	}
+	
+	public static ArrayList<Quiz> getPopularQuizzes() {
+		ArrayList<Quiz> quizzes = new ArrayList<Quiz>();
+		
+		return quizzes;
+	}
+	
+	public static ArrayList<Quiz> getFriendsRecentQuizzes() {
+		ArrayList<Quiz> quizzes = new ArrayList<Quiz>();
+		return quizzes;
 	}
 }

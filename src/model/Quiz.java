@@ -132,13 +132,7 @@ public class Quiz {
 		return questions;
 	}
 	
-	public static ArrayList<Quiz> getPopularQuizzes() {
-		ArrayList<Quiz> quizzes = new ArrayList<Quiz>();
-		
-		return quizzes;
-	}
-	
-	public static ArrayList<Quiz> getFriendsRecentQuizzes() {
+	public static ArrayList<Quiz> getSimilarQuizName(String quizName) {
 		ArrayList<Quiz> quizzes = new ArrayList<Quiz>();
 		return quizzes;
 	}

@@ -140,4 +140,9 @@ public class User {
 			e.printStackTrace();
 		}
 	}
+	
+	public static ArrayList<User> getSimilarUsernames(String username) {
+		ArrayList<User> users = new ArrayList<User>();
+		return users;
+	}
 }

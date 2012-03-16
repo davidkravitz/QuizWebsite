@@ -30,9 +30,9 @@
 						
 						// Stub filled with dummy quizzes
 						ArrayList<Quiz> quizzes = new ArrayList<Quiz>();
-						quizzes.add(new Quiz("category", "World War II", "createdBy", "description", "dateCreated", false, false, false));
-						quizzes.add(new Quiz("category", "Algebra I", "createdBy", "description", "dateCreated", false, false, false));
-						quizzes.add(new Quiz("category", "Political Philosophy", "createdBy", "description", "dateCreated", false, false, false));
+						quizzes.add(new Quiz(0, "category", "World War II", "createdBy", "description", "dateCreated", false, false, false));
+						quizzes.add(new Quiz(1, "category", "Algebra I", "createdBy", "description", "dateCreated", false, false, false));
+						quizzes.add(new Quiz(2, "category", "Political Philosophy", "createdBy", "description", "dateCreated", false, false, false));
 						
 						for (Quiz quiz : quizzes) {
 							out.println("<div class=\"quiz\">");
@@ -89,7 +89,20 @@
 				
 				
 				<div class="homepage-section">
-				<div class="title">Your Friends' Recent Activity</div>
+					<div class="title">Your Friends' Recent Activity</div>
+										<%
+		/* 				String username = (String) session.getAttribute("username");
+						ArrayList<QuizTake> quizTakes = QuizTake.getTakenQuizzesForUser(username); */
+						
+						// Stub filled with dummy Users
+						quizTakes.add(new QuizTake("quizName", "username", 0, "dataTaken", "timeSpent"));
+						String username = "david";
+						for (QuizTake quizTake : quizTakes) {
+							out.println("<div class=\"quiz\">");
+							out.println("<a href=\"user.jsp?username=" + username + "\">" + username + "</a>");
+							out.println("</div>");
+						}
+					%>
 				</div>
 				
 			</div>

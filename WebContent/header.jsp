@@ -1,9 +1,12 @@
 <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.4.3/jquery.min.js"></script> 
 <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.8.2/jquery-ui.min.js"></script>
 <script type="text/javascript" src="static/js/header.js"></script>
+<script type="text/javascript" src="static/js/tooltips.js"></script>
+<script type="text/javascript" src="static/js/jquery.tipTip.js"></script>
 
 <link type="text/css" href="static/css/all.css" rel="stylesheet"/>
 <link type="text/css" href="static/css/header.css" rel="stylesheet"/>
+<link type="text/css" href="static/css/tooltips.css" rel="stylesheet"/>
 
 
 <div id="header">
@@ -34,7 +37,7 @@
 			<li id="nav-account">
 				<div id="profile-container">
 					<div id="session">
-						<a id="session-name" href="/profile.jsp"> <%=(String) session.getAttribute("username")%>
+						<a id="session-name" href="user.jsp?username=<%=(String) session.getAttribute("username")%>"> <%=(String) session.getAttribute("username")%>
 						</a> <span class="arrow-down arrow-down-unselected"></span>
 					</div>
 
@@ -45,7 +48,7 @@
 				</div>
 				<div class="dropdown">
 					<ul id="user-dropdown">
-						<li><a href="profile.jsp">Profile</a></li>
+						<li><a href="user.jsp?username=<%=(String) session.getAttribute("username")%>">Profile</a></li>
 						<li><a href="settings.jsp">Settings</a></li>
 						<li><a href="logout.jsp">Log Out</a></li>
 					</ul>

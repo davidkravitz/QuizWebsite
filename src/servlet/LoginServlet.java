@@ -27,14 +27,9 @@ public class LoginServlet extends HttpServlet {
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
-		// Get a hold of the account manager
-		ServletContext context = request.getServletContext();
-
 		// Get the name and password entered by the user
 		String username = request.getParameter("username");
 		String password = request.getParameter("password");
-		System.out.println("Username: " + username);
-		System.out.println("Password: " + password);
 		
 		// Check to see if the username and password are correct. If they are,
 		// switch to the "user welcome" page. Otherwise, switch to the "please
@@ -42,7 +37,6 @@ public class LoginServlet extends HttpServlet {
 		if (User.userExists(username)) {
 			if (User.correctPassword(username, password)) {
 				HttpSession session = request.getSession();
-				User user = User.getUser(username);
 				session.setAttribute("username", username);
 				
 				// Redirect to the original request page if possible

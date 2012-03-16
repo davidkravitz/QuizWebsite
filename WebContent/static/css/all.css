@@ -12,6 +12,10 @@ a,a:visited {
     color: #19558D; /* Color for all the links */
 }
 
+a img {
+	border:none; 
+}
+
 a:hover {
     text-decoration: underline;
 }

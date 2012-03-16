@@ -11,7 +11,7 @@
 
 
 <div id="header">
-
+	<% String loggedInUser = (String) session.getAttribute("username"); %>
 	<div id="user-row">
 		<div id="logo">
 			<a href="index.jsp" class="logo">QuizWebsite</a>

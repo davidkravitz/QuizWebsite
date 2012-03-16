@@ -110,7 +110,7 @@
 						ArrayList<QuizTake> quizTakes = QuizTake.getFriendsRecentQuizzes(username); */
 						
 						// Stub filled with dummy Users
-						quizTakes.add(new QuizTake(1, "username", 0, 0, "dataTaken", "timeSpent"));
+						quizTakes.add(new QuizTake("dummy_name", 1, "username", 0, 0, "dataTaken", "timeSpent"));
 						String username = "david";
 						for (QuizTake quizTake : quizTakes) {
 							out.println("<div class=\"quiz\">");
@@ -127,7 +127,7 @@
 						ArrayList<QuizTake> quizTakes = QuizTake.getFriendsRecentQuizzes(username); */
 						
 						// Stub filled with dummy Users
-						quizTakes.add(new QuizTake(1, "username", 0, 0, "dataTaken", "timeSpent"));
+						quizTakes.add(new QuizTake("another dummy name", 1, "username", 0, 0, "dataTaken", "timeSpent"));
 						username = "david";
 						for (QuizTake quizTake : quizTakes) {
 							out.println("<div class=\"quiz\">");

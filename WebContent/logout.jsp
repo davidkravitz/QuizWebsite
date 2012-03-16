@@ -8,10 +8,15 @@
 <title>Logged out</title>
 
 <%
-	request.getSession().removeAttribute("username");  
+	request.getSession().removeAttribute("username");
 %>
 
 </head>
-	<body>You have successfully logged out.</body>
+	<body>
+		You have successfully logged out.
+		<div>
+			<a href="login.jsp">Login</a>
+		</div>
+	</body>
 </html>
 

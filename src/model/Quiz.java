@@ -88,6 +88,18 @@ public class Quiz {
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
+		query = "DELETE FROM quizTakes where quizId = " + quizId;
+		try {
+			DBConnection.newConnection().executeUpdate(query);
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		query = "DELETE FROM reportedQuizzes where quizId = " + quizId;
+		try {
+			DBConnection.newConnection().executeUpdate(query);
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
 	}
 	
 	public static int createQuiz(String quizName, String category, String description, String createdBy, boolean randomized, boolean multiplePage, boolean immediateCorrection) {

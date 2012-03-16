@@ -18,13 +18,14 @@
 				
 				<div class="homepage-section">
 					<div class="title">Reported Quizzes</div>
-					<table>
+					<table border="1">
 					<tr>
 					<th>Action</th>
 					<th>User</th>
 					<th>quizId</th>
 					<th>Message</th>
 					<th>Type</th>
+					<th>Date</th>
 					</tr>
 					<%
 						int numQuizzes = 5;
@@ -51,6 +52,9 @@
 							out.println("</td>");
 							out.println("<td>");
 							out.println(quizReport.type);
+							out.println("</td>");
+							out.println("<td>");
+							out.println(quizReport.dateCreated);
 							out.println("</td>");
 							out.println("</tr>");
 						}

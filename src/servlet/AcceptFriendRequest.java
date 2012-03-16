@@ -7,19 +7,20 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import model.Announcement;
+import model.FriendRequest;
+import model.Quiz;
 
 /**
- * Servlet implementation class MakeAnnouncement
+ * Servlet implementation class AcceptFriendRequest
  */
-@WebServlet("/MakeAnnouncement")
-public class MakeAnnouncement extends HttpServlet {
+@WebServlet("/AcceptFriendRequest")
+public class AcceptFriendRequest extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public MakeAnnouncement() {
+    public AcceptFriendRequest() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -35,10 +36,11 @@ public class MakeAnnouncement extends HttpServlet {
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		String message = request.getParameter("announcement");
-		Announcement.makeAnnouncement(message, "", "General");
-		request.setAttribute("successMessage", "Your announcement has been made.");
-		request.getRequestDispatcher("confirmation-page.jsp").forward(request, response);
+		String friendName = request.getParameter("friendName");
+		String username = (String) request.getSession().getAttribute("username");
+		FriendRequest.acceptFriendRequest(username, friendName);
+		request.setAttribute("successMessage", "Friend request accepted");
+		request.getRequestDispatcher("confirmation-non-admin.jsp").forward(request, response);
 	}
 
 }

@@ -24,18 +24,39 @@
 					</div>
 					<div class="profile-info">
 						<div class="title profile-name"><%=request.getParameter("username")%></div>
-						<form action="FriendRequestServlet" method="post">
-							<input type="hidden" name="friendName"
-								value="<%=request.getParameter("username")%>">
-							<input class="button profile-button" type="submit" value="Add Friend">
-						</form>
+						<%
+							String currUser = request.getParameter("username");
+							if (!currUser.equals(loggedInUser)) {
+								int status = FriendRequest.getFriendStatus(loggedInUser, currUser);
+								if (status == 0) {
+									out.println("<form action=\"FriendRequestServlet\" method=\"post\">");
+									out.println("<input type=\"hidden\" name=\"friendName\"");
+									out.println("value=\"" + currUser + "\">");
+									out.println("<input class=\"button profile-button\" type=\"submit\" value=\"Add Friend\">");
+									out.println("</form>");
+								} else if (status == 1) {
+									out.println("Friend Request Sent.");
+								} else if (status == 2) {
+									out.println("<form action=\"AcceptFriendRequest\" method=\"post\">");
+									out.println("<input type=\"hidden\" name=\"friendName\"");
+									out.println("value=\"" + currUser + "\">");
+									out.println("<input class=\"button profile-button\" type=\"submit\" value=\"Accept Friend Request\">");
+									out.println("</form>");
+								} else {
+									out.println("Friends");
+								}
+							}
+						 %>
 					</div>
-					<form action="SendMessageServlet" method="post" class="message-form">
-						<textarea name="message"">Send <%=request.getParameter("username")%> a message.</textarea>
-						<input type="hidden" name="recipientName" value="<%=request.getParameter("username")%>"> 
-						<input class="button profile-button" type="submit" value="Send">
-					</form>
-
+					<%
+					if (!currUser.equals(loggedInUser)) {
+						out.println("<form action=\"SendMessageServlet\" method=\"post\" class=\"message-form\">");
+						out.println("<textarea name=\"message\">Send " + request.getParameter("username") + " a message.</textarea>");
+						out.println("<input type=\"hidden\" name=\"recipientName\" value=\"" + request.getParameter("username") + "\" />"); 
+						out.println("<input class=\"button profile-button\" type=\"submit\" value=\"Send\" />");
+						out.println("</form>");
+					}
+					%>
 				</div>
 
 				<div class="profile-section">

@@ -22,7 +22,7 @@ public class AcceptFriendRequestServlet extends HttpServlet {
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		String requestingName = request.getParameter("requestingName");
-		String requestedName = (String) request.getSession().getAttribute("re");
+		String requestedName = (String) request.getSession().getAttribute("username");
 		FriendRequest.acceptFriendRequest(requestedName, requestingName);
 		request.setAttribute("successMessage", "You and " + requestingName + " are now friends.");
 		request.getRequestDispatcher("message-sent.jsp").forward(request, response);

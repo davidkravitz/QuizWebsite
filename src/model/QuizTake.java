@@ -16,13 +16,14 @@ public class QuizTake {
 	public int qtId;
 	public String quizName;
 	
-	public QuizTake(int qtId, String username, int quizId, int score, String dateTaken, String timeSpent) {
+	public QuizTake(String quizName, int qtId, String username, int quizId, int score, String dateTaken, String timeSpent) {
 		this.qtId = qtId;
 		this.username = username;
 		this.score = score;
 		this.dateTaken = dateTaken;
 		this.timeSpent = timeSpent;
 		this.quizId = quizId;
+		this.quizName = quizName;
 	}
 	
 	public static ArrayList<QuizTake> getTakenQuizzesForUser(String username) {
@@ -31,7 +32,7 @@ public class QuizTake {
 		try {
 			ResultSet rs = DBConnection.newConnection().executeQuery(query);
 			while (rs.next()) {
-				quizTakes.add(new QuizTake(Integer.valueOf(rs.getString("qtId")), rs.getString("username"), Integer.valueOf(rs.getString("quizId")), Integer.valueOf(rs.getString("score")), rs.getString("dateTaken"), rs.getString("timeSpent")));
+				quizTakes.add(new QuizTake(rs.getString("quizName"), Integer.valueOf(rs.getString("qtId")), rs.getString("username"), Integer.valueOf(rs.getString("quizId")), Integer.valueOf(rs.getString("score")), rs.getString("dateTaken"), rs.getString("timeSpent")));
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -39,11 +40,11 @@ public class QuizTake {
 		return quizTakes;
 	}
 	
-	public static void recordCompletedQuiz(int quizId, String username, int score, String timeElapsed) {
+	public static void recordCompletedQuiz(int quizId, String quizName, String username, int score, String timeElapsed) {
 		DateFormat dateFormat = new SimpleDateFormat("yyyy:MM:dd HH:mm:ss");
 		Date date = new Date();
 		String stringDate = dateFormat.format(date);
-		String query = "INSERT into " + DBConnection.quizTakeTable + " (username, quizId, score, dateTaken, timeSpent) VALUES ('" + username + "', '" + quizId + "', '" + score + "', '" + stringDate + "', '" + timeElapsed + "')";
+		String query = "INSERT into " + DBConnection.quizTakeTable + " (username, quizId, quizName, score, dateTaken, timeSpent) VALUES ('" + username + "', '" + quizId + "', '" + quizName + "', '" + score + "', '" + stringDate + "', '" + timeElapsed + "')";
 		try {
 			DBConnection.newConnection().executeUpdate(query);
 		} catch (SQLException e) {
@@ -60,7 +61,7 @@ public class QuizTake {
 		try {
 			ResultSet rs = DBConnection.newConnection().executeQuery(query);
 			while (rs.next()) {
-				quizTakes.add(new QuizTake(Integer.valueOf(rs.getString("qtId")), rs.getString("username"), Integer.valueOf(rs.getString("quizId")), Integer.valueOf(rs.getString("score")), rs.getString("dateTaken"), rs.getString("timeSpent")));
+				quizTakes.add(new QuizTake(rs.getString("quizTake"), Integer.valueOf(rs.getString("qtId")), rs.getString("username"), Integer.valueOf(rs.getString("quizId")), Integer.valueOf(rs.getString("score")), rs.getString("dateTaken"), rs.getString("timeSpent")));
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -77,7 +78,7 @@ public class QuizTake {
 		try {
 			ResultSet rs = DBConnection.newConnection().executeQuery(query);
 			while (rs.next()) {
-				quizTakes.add(new QuizTake(Integer.valueOf(rs.getString("qtId")), rs.getString("username"), Integer.valueOf(rs.getString("quizId")), Integer.valueOf(rs.getString("score")), rs.getString("dateTaken"), rs.getString("timeSpent")));
+				quizTakes.add(new QuizTake(rs.getString("quizTake"), Integer.valueOf(rs.getString("qtId")), rs.getString("username"), Integer.valueOf(rs.getString("quizId")), Integer.valueOf(rs.getString("score")), rs.getString("dateTaken"), rs.getString("timeSpent")));
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -112,8 +113,7 @@ public class QuizTake {
 		try {
 			ResultSet rs = DBConnection.newConnection().executeQuery(query);
 			while (rs.next()) {
-				QuizTake quizTake = new QuizTake(0, rs.getString("friendName"), Integer.valueOf(rs.getString("quizId")), Integer.valueOf(rs.getString("score")), rs.getString("dateTaken"), rs.getString("timeSpent"));
-				quizTake.quizName = rs.getString("name");
+				QuizTake quizTake = new QuizTake(rs.getString("name"), 0, rs.getString("friendName"), Integer.valueOf(rs.getString("quizId")), Integer.valueOf(rs.getString("score")), rs.getString("dateTaken"), rs.getString("timeSpent"));
 				quizTakes.add(quizTake);
 			}
 		} catch (SQLException e) {

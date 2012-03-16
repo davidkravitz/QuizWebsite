@@ -8,18 +8,19 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import model.Announcement;
+import model.Quiz;
 
 /**
  * Servlet implementation class MakeAnnouncement
  */
-@WebServlet("/MakeAnnouncement")
-public class MakeAnnouncement extends HttpServlet {
+@WebServlet("/DeleteQuiz")
+public class DeleteQuiz extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public MakeAnnouncement() {
+    public DeleteQuiz() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -35,9 +36,9 @@ public class MakeAnnouncement extends HttpServlet {
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		String message = request.getParameter("announcement");
-		Announcement.makeAnnouncement(message, "", "General");
-		request.setAttribute("successMessage", "Your announcement has been made.");
+		int quizId = Integer.valueOf(request.getParameter("quizId"));
+		Quiz.removeQuiz(quizId);
+		request.setAttribute("successMessage", "The quiz has been deleted");
 		request.getRequestDispatcher("confirmation-page.jsp").forward(request, response);
 	}
 

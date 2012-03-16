@@ -33,7 +33,6 @@ public class SendMessageServlet extends HttpServlet {
 		model.Message.sendMessage(username, recipientName, message, "");
 		System.out.println(username + " sent a message to " + recipientName);
 		System.out.println("Message: " + message);
-		
 	}
 
 }

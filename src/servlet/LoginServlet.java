@@ -38,6 +38,7 @@ public class LoginServlet extends HttpServlet {
 			if (User.correctPassword(username, password)) {
 				HttpSession session = request.getSession();
 				session.setAttribute("username", username);
+				User user = User.getUser(username);
 				session.setAttribute("user", user);
 				
 				// Redirect to the original request page if possible

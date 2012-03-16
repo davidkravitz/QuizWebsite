@@ -19,7 +19,7 @@ First, enter some basic data about the quiz
     <input type="radio" name="page" value="multiple" />Multiple<br/>
     Category:<select name="category">
     	<%
-    		String[] categories = { "Math", "English", "Art", "History", "Science", "General", "Music", "Other" };
+    		String[] categories = {"Math", "English", "Art", "History", "Science", "General", "Music", "Other" };
     		for(String category : categories) {
     			out.println("<option value=\""+category+"\">"+category+"</option>");
     		}

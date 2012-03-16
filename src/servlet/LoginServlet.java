@@ -44,6 +44,7 @@ public class LoginServlet extends HttpServlet {
 				HttpSession session = request.getSession();
 				User user = User.getUser(username);
 				session.setAttribute("username", username);
+				session.setAttribute("user", user);
 				
 				// Redirect to the original request page if possible
 //				String requestedUrl = (String) session.getAttribute("requestedUrl");

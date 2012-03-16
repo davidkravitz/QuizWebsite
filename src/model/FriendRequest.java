@@ -49,7 +49,7 @@ public class FriendRequest {
 		try {
 			ResultSet rs = DBConnection.newConnection().executeQuery(query);
 			while (rs.next()) {
-				friendRequests.add(new FriendRequest(rs.getString("username"), rs.getString("requestedName"), rs.getString("dateCreated")));
+				friendRequests.add(new FriendRequest(rs.getString("requestedName"), rs.getString("requestingName"), rs.getString("dateCreated")));
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();

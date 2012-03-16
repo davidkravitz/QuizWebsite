@@ -50,7 +50,7 @@
 				<div class="dropdown">
 					<ul id="user-dropdown">
 						<li><a href="user.jsp?username=<%=(String) session.getAttribute("username")%>">Profile</a></li>
-						<li><a href="settings.jsp">Settings</a></li>
+						<li><a href="messages.jsp">Messages</a></li>
 						<li><a href="logout.jsp">Log Out</a></li>
 					</ul>
 				</div>

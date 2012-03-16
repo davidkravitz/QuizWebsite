@@ -81,20 +81,6 @@ public class Quiz {
 		return quizzes;
 	}
 	
-	public static double getAverageScoreFor(int quizId) {
-		String query = "SELECT AVG(score) FROM " + DBConnection.quizTakeTable + " WHERE quizId = '" + quizId + "'";
-		double averageScore = 0.0;
-		try {
-			ResultSet rs = DBConnection.newConnection().executeQuery(query);
-			while (rs.next()) {
-				averageScore = Double.valueOf(rs.getString(1));
-			}
-		} catch (SQLException e) {
-			e.printStackTrace();
-		}
-		return averageScore;
-	}
-	
 	public static void removeQuiz(int quizId) {
 		String query = "DELETE FROM " + DBConnection.quizTable + " WHERE quizId = '" + quizId + "'";
 		try {
@@ -146,4 +132,19 @@ public class Quiz {
 		return questions;
 	}
 	
+	public static ArrayList<Quiz> getPopularQuizzes() {
+		ArrayList<Quiz> quizzes = new ArrayList<Quiz>();
+		
+		return quizzes;
+	}
+	
+	public static ArrayList<Quiz> getFriendsRecentQuizzes() {
+		ArrayList<Quiz> quizzes = new ArrayList<Quiz>();
+		return quizzes;
+	}
+	
+	public static ArrayList<Quiz> getRecentQuizzes(int limit) {
+		ArrayList<Quiz> quizzes = new ArrayList<Quiz>();
+		return quizzes;
+	}
 }

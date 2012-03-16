@@ -18,8 +18,8 @@ public class QuizReport {
 		this.dateCreated = dateCreated;
 	}
 	
-	public static void reportQuiz(String username, String quizName, String message, String type, String dateCreated) {
-		String query = "INSERT into " + DBConnection.reportedQuizzesTable + " (username, quiz, message, type, dateCreated) VALUES ('" + username + "', '" + quizName + "', '" + message + "', '" + type + "', '" + dateCreated + "')";
+	public static void reportQuiz(String username, int quizId, String message, String type, String dateCreated) {
+		String query = "INSERT into " + DBConnection.reportedQuizzesTable + " (username, quizId, message, type, dateCreated) VALUES ('" + username + "', '" + quizId + "', '" + message + "', '" + type + "', '" + dateCreated + "')";
 		try {
 			DBConnection.newConnection().executeUpdate(query);
 		} catch (SQLException e) {

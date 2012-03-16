@@ -13,8 +13,10 @@ public class QuizTake {
 	public int score;
 	public String dateTaken;
 	public String timeSpent;
+	public int qtId;
 	
-	public QuizTake(String quizName, String username, int score, String dateTaken, String timeSpent) {
+	public QuizTake(int qtId, String quizName, String username, int score, String dateTaken, String timeSpent) {
+		this.qtId = qtId;
 		this.quizName = quizName;
 		this.username = username;
 		this.score = score;
@@ -28,7 +30,7 @@ public class QuizTake {
 		try {
 			ResultSet rs = DBConnection.newConnection().executeQuery(query);
 			while (rs.next()) {
-				quizTakes.add(new QuizTake(rs.getString("quizName"), rs.getString("username"), Integer.valueOf(rs.getString("score")), rs.getString("dateTaken"), rs.getString("timeSpent")));
+				quizTakes.add(new QuizTake(Integer.valueOf(rs.getString("qtId")), rs.getString("quizName"), rs.getString("username"), Integer.valueOf(rs.getString("score")), rs.getString("dateTaken"), rs.getString("timeSpent")));
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -36,11 +38,11 @@ public class QuizTake {
 		return quizTakes;
 	}
 	
-	public static void recordCompletedQuiz(String quizName, String username, int score, String timeElapsed) {
+	public static void recordCompletedQuiz(int quizId, String username, int score, String timeElapsed) {
 		DateFormat dateFormat = new SimpleDateFormat("yyyy:MM:dd HH:mm:ss");
 		Date date = new Date();
 		String stringDate = dateFormat.format(date);
-		String query = "INSERT into " + DBConnection.quizTakeTable + " (username, quizName, score, dateTaken, timeSpent) VALUES ('" + username + "', '" + quizName + "', '" + score + "', '" + stringDate + "', '" + timeElapsed + "')";
+		String query = "INSERT into " + DBConnection.quizTakeTable + " (username, quizId, score, dateTaken, timeSpent) VALUES ('" + username + "', '" + quizId + "', '" + score + "', '" + stringDate + "', '" + timeElapsed + "')";
 		try {
 			DBConnection.newConnection().executeUpdate(query);
 		} catch (SQLException e) {
@@ -48,8 +50,8 @@ public class QuizTake {
 		}
 	}
 	
-	public static ArrayList<QuizTake> getTopScorersFor(String quizName, int limit) {
-		String query = "SELECT * FROM " + DBConnection.quizTakeTable + " WHERE quizName = '" + quizName + "' " + " ORDER BY score DESC";
+	public static ArrayList<QuizTake> getTopScorersFor(int quizId, int limit) {
+		String query = "SELECT * FROM " + DBConnection.quizTakeTable + " WHERE quizId = '" + quizId + "' " + " ORDER BY score DESC";
 		if (limit > 0) {
 			query += " LIMIT " + limit;
 		}
@@ -57,7 +59,7 @@ public class QuizTake {
 		try {
 			ResultSet rs = DBConnection.newConnection().executeQuery(query);
 			while (rs.next()) {
-				quizTakes.add(new QuizTake(rs.getString("quizName"), rs.getString("username"), Integer.valueOf(rs.getString("score")), rs.getString("dateTaken"), rs.getString("timeSpent")));
+				quizTakes.add(new QuizTake(Integer.valueOf(rs.getString("qtId")), rs.getString("quizName"), rs.getString("username"), Integer.valueOf(rs.getString("score")), rs.getString("dateTaken"), rs.getString("timeSpent")));
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -65,8 +67,8 @@ public class QuizTake {
 		return quizTakes;
 	}
 	
-	public static ArrayList<QuizTake> getQuizTakersFor(String quizName, int limit) {
-		String query = "SELECT * FROM " + DBConnection.quizTakeTable + " WHERE quizName = '" + quizName + "' " + " ORDER BY dateTaken DESC";
+	public static ArrayList<QuizTake> getQuizTakersFor(int quizId, int limit) {
+		String query = "SELECT * FROM " + DBConnection.quizTakeTable + " WHERE quizId = '" + quizId + "' " + " ORDER BY dateTaken DESC";
 		if (limit > 0) {
 			query += " LIMIT " + limit;
 		}
@@ -74,11 +76,29 @@ public class QuizTake {
 		try {
 			ResultSet rs = DBConnection.newConnection().executeQuery(query);
 			while (rs.next()) {
-				quizTakes.add(new QuizTake(rs.getString("quizName"), rs.getString("username"), Integer.valueOf(rs.getString("score")), rs.getString("dateTaken"), rs.getString("timeSpent")));
+				quizTakes.add(new QuizTake(Integer.valueOf(rs.getString("qtId")), rs.getString("quizName"), rs.getString("username"), Integer.valueOf(rs.getString("score")), rs.getString("dateTaken"), rs.getString("timeSpent")));
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
 		return quizTakes;
+	}
+	
+	public static double getAverageScoreFor(int quizId) {
+		String query = "SELECT AVG(score) FROM " + DBConnection.quizTakeTable + " WHERE quizId = '" + quizId + "'";
+		double averageScore = 0.0;
+		try {
+			ResultSet rs = DBConnection.newConnection().executeQuery(query);
+			while (rs.next()) {
+				averageScore = Double.valueOf(rs.getString(1));
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return averageScore;
+	}
+	
+	public static int getNumTakersFor(String quizName) {
+		return 1;
 	}
 }

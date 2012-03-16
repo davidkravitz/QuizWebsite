@@ -6,6 +6,7 @@
 
 <link type="text/css" href="static/css/all.css" rel="stylesheet"/>
 <link type="text/css" href="static/css/header.css" rel="stylesheet"/>
+<link type="text/css" href="static/css/buttons.css" rel="stylesheet"/>
 <link type="text/css" href="static/css/tooltips.css" rel="stylesheet"/>
 
 

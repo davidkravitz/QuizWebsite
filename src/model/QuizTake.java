@@ -8,16 +8,14 @@ import java.util.ArrayList;
 import java.util.Date;
 
 public class QuizTake {
-	public String quizName;
 	public String username;
 	public int score;
 	public String dateTaken;
 	public String timeSpent;
 	public int qtId;
 	
-	public QuizTake(int qtId, String quizName, String username, int score, String dateTaken, String timeSpent) {
+	public QuizTake(int qtId, String username, int score, String dateTaken, String timeSpent) {
 		this.qtId = qtId;
-		this.quizName = quizName;
 		this.username = username;
 		this.score = score;
 		this.dateTaken = dateTaken;
@@ -30,7 +28,7 @@ public class QuizTake {
 		try {
 			ResultSet rs = DBConnection.newConnection().executeQuery(query);
 			while (rs.next()) {
-				quizTakes.add(new QuizTake(Integer.valueOf(rs.getString("qtId")), rs.getString("quizName"), rs.getString("username"), Integer.valueOf(rs.getString("score")), rs.getString("dateTaken"), rs.getString("timeSpent")));
+				quizTakes.add(new QuizTake(Integer.valueOf(rs.getString("qtId")), rs.getString("username"), Integer.valueOf(rs.getString("score")), rs.getString("dateTaken"), rs.getString("timeSpent")));
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -59,7 +57,7 @@ public class QuizTake {
 		try {
 			ResultSet rs = DBConnection.newConnection().executeQuery(query);
 			while (rs.next()) {
-				quizTakes.add(new QuizTake(Integer.valueOf(rs.getString("qtId")), rs.getString("quizName"), rs.getString("username"), Integer.valueOf(rs.getString("score")), rs.getString("dateTaken"), rs.getString("timeSpent")));
+				quizTakes.add(new QuizTake(Integer.valueOf(rs.getString("qtId")), rs.getString("username"), Integer.valueOf(rs.getString("score")), rs.getString("dateTaken"), rs.getString("timeSpent")));
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -76,7 +74,7 @@ public class QuizTake {
 		try {
 			ResultSet rs = DBConnection.newConnection().executeQuery(query);
 			while (rs.next()) {
-				quizTakes.add(new QuizTake(Integer.valueOf(rs.getString("qtId")), rs.getString("quizName"), rs.getString("username"), Integer.valueOf(rs.getString("score")), rs.getString("dateTaken"), rs.getString("timeSpent")));
+				quizTakes.add(new QuizTake(Integer.valueOf(rs.getString("qtId")), rs.getString("username"), Integer.valueOf(rs.getString("score")), rs.getString("dateTaken"), rs.getString("timeSpent")));
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();

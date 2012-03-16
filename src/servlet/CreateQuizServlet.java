@@ -15,6 +15,7 @@ import model.Quiz;
 @WebServlet("/CreateQuizServlet")
 public class CreateQuizServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
+	private static final String addQuestionUrl = "add-question.jsp";
        
     /**
      * @see HttpServlet#HttpServlet()
@@ -47,18 +48,23 @@ public class CreateQuizServlet extends HttpServlet {
 		boolean immediateCorrection = immediateOp == null ? false : true;
 		boolean multiplePage = pageStyle.equals("single") ? false : true;
 		
-		System.out.println("Create quiz servlet!");
-		System.out.println("Quiz name:"+quizName);
-		System.out.println("Desc: "+description);
-		System.out.println("randomized: "+randomized);
-		System.out.println("category: "+category);
-		System.out.println("createdBy: "+createdBy);
-		System.out.println("multiple: "+multiplePage);
-		System.out.println("immediate: "+immediateCorrection);
-		System.out.println("multiplePage: "+multiplePage);
+//		System.out.println("Create quiz servlet!");
+//		System.out.println("Quiz name:"+quizName);
+//		System.out.println("Desc: "+description);
+//		System.out.println("randomized: "+randomized);
+//		System.out.println("category: "+category);
+//		System.out.println("createdBy: "+createdBy);
+//		System.out.println("multiple: "+multiplePage);
+//		System.out.println("immediate: "+immediateCorrection);
+//		System.out.println("multiplePage: "+multiplePage);
 		
+		int quizId = Quiz.createQuiz(quizName, category, description, createdBy, randomized, multiplePage, immediateCorrection);
+		Quiz curr = Quiz.getQuiz(quizId);
+		//	System.out.println("Just created a quiz! "+quizId);
+		request.getSession().setAttribute("currCreationQuiz", curr);
+		request.getSession().setAttribute("quizFinished", false);
 		
-		Quiz.createQuiz(quizName, category, description, createdBy, randomized, multiplePage, immediateCorrection);
+		request.getRequestDispatcher(addQuestionUrl).forward(request, response);
 	}
 
 }

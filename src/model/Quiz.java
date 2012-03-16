@@ -108,8 +108,11 @@ public class Quiz {
 		try {
 			ResultSet rs = DBConnection.newConnection().executeQuery(query);
 			while (rs.next()) {
-				if (!rs.getString("maxId").equals("NULL"))
-					maxId = Integer.valueOf(rs.getString("maxId")) + 1;
+				if (rs != null) {
+					if (rs.getString("maxId") != null) {
+						maxId = Integer.valueOf(rs.getString("maxId")) + 1;
+					}
+				}
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();

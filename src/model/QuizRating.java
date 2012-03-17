@@ -37,7 +37,7 @@ public class QuizRating {
 	
 	public static ArrayList<QuizRating> getQuizRatingsFor(int quizId, int limit) {
 		ArrayList<QuizRating> ratings = new ArrayList<QuizRating>();
-		String query = "SELECT * FROM " + DBConnection.quizRatingTable + "WHERE quizId = '" + quizId + "' ORDER BY dateCreated DESC";
+		String query = "SELECT * FROM " + DBConnection.quizRatingTable + " WHERE quizId = " + quizId + " ORDER BY dateCreated DESC";
 		if (limit > 0) {
 			query += " LIMIT " + limit;
 		}

@@ -84,7 +84,38 @@
 	
 	<div id="today">
 		<h3>High Scorers (Today)</h3>
+	</div>
+	
+	<div id="ratings">
+		<h3>Ratings</h3>
+		<table border="1">
+			<tr>
+			<th>Rating</th>
+			<th>Message</th>
+			<th>Username</th>
+			<th>Date</th>
+			</tr>
+		<%
+			ArrayList<QuizRating> ratings = QuizRating.getQuizRatingsFor(quiz.quizId, 10);
+			for (QuizRating rating : ratings) {
+				out.println("<tr class=\"rating\">");
+				out.println("<td>");
+				out.println(rating.rating);
+				out.println("</td>");
+				out.println("<td>");
+				out.println(rating.review);
+				out.println("</td>");
+				out.println("<td>");
+				out.println(rating.username);
+				out.println("</td>");
+				out.println("<td>");
+				out.println(rating.dateCreated);
+				out.println("</td>");
+				out.println("</tr>");
+			}
 		
+		 %>
+		 </table>
 	</div>
 	
 	<div id="recent">

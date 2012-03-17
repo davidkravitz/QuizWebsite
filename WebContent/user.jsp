@@ -58,6 +58,37 @@
 					}
 					%>
 				</div>
+				
+				<%
+				if (currUser.equals(loggedInUser)) {
+					out.println("<div class='profile-section'>");
+					out.println("<div class=\"title\">Rate these Quizzes</div>");
+					
+					ArrayList<Quiz> quizzes = Quiz.getUnratedQuizzes(loggedInUser, 10);
+					for (Quiz quiz : quizzes) {
+							out.println("<div class=\"quiz\">");
+							out.println("Quiz: <a href=\"QuizSummaryServlet?quiz=" + quiz.quizId + "\">" + quiz.name + "</a> <br />Rating: ");
+							out.println("<form method=\"post\" action=\"RateQuiz\"><select name=\"rating\">");
+							out.println("<option value=\"1\">1</option>");
+							out.println("<option value=\"2\">2</option>");
+							out.println("<option value=\"3\">3</option>");
+							out.println("<option value=\"4\">4</option>");
+							out.println("<option value=\"5\">5</option>");
+							out.println("<option value=\"6\">6</option>");
+							out.println("<option value=\"7\">7</option>");
+							out.println("<option value=\"8\">8</option>");
+							out.println("<option value=\"9\">9</option>");
+							out.println("<option value=\"10\">10</option>");
+							out.println("</select>");
+							out.println("<input type=\"hidden\" name=\"quizId\" value=\"" + quiz.quizId + "\" />");
+							out.println("Message: <input type=\"text\" name=\"message\" />");
+							out.println("<input type=\"submit\" value=\"Rate!\" /></form>");
+							out.println("</div><br />");
+					}
+					 
+					out.println("</div>");
+				}
+				 %>
 
 				<div class="profile-section">
 					<div class="title">Quizzes Made</div>

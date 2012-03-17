@@ -209,4 +209,21 @@ public class Quiz {
 		}
 		return quizzes;
 	}
+	
+	public static ArrayList<Quiz> getUnratedQuizzes(String username, int limit) {
+		String query = "select distinct myQuizTakes.quizName, myQuizTakes.quizId from (select * from quizTakes where username = '" + username + "') myQuizTakes inner join (select * from quizRatings where username = '" + username + "') myQuizRatings on myQuizTakes.quizId != myQuizRatings.quizId";
+		if (limit > 0) {
+			query += " LIMIT " + limit;
+		}
+		ArrayList<Quiz> quizzes = new ArrayList<Quiz>();
+		try {
+			ResultSet rs = DBConnection.newConnection().executeQuery(query);
+			while (rs.next()) {
+				quizzes.add(new Quiz(Integer.valueOf(rs.getString("quizId")), "", rs.getString("quizName"), "", "", "", false, false, false));
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return quizzes;
+	}
 }

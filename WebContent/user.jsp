@@ -66,18 +66,10 @@
 						/* ArrayList<Quiz> quizzes = Quiz.getQuizzesBy(username, 0); */
 
 						// Stub filled with dummy quizzes
-						ArrayList<Quiz> quizzes = new ArrayList<Quiz>();
-						quizzes.add(new Quiz(0, "category", "World War II", "createdBy",
-								"description", "dateCreated", false, false, false));
-						quizzes.add(new Quiz(1, "category", "Algebra I", "createdBy",
-								"description", "dateCreated", false, false, false));
-						quizzes.add(new Quiz(2, "category", "Political Philosophy",
-								"createdBy", "description", "dateCreated", false, false,
-								false));
-
+						ArrayList<Quiz> quizzes = Quiz.getQuizzesBy(username, 0);
 						for (Quiz quiz : quizzes) {
 							out.println("<div class=\"quiz\">");
-							out.println("<a href=\"" + quiz.hashCode() + "\">" + quiz.name
+							out.println("<a href=\"QuizSummaryServlet?quiz=" + quiz.quizId + "\">" + quiz.name
 									+ "</a>");
 							out.println("</div>");
 						}
@@ -86,27 +78,35 @@
 				
 				<div class="profile-section">
 					<div class="title">Quizzes Taken</div>
+					<table border="1">
+					<tr>
+					<th>Quiz Name</th>
+					<th>Score</th>
+					<th>Time Spent</th>
+					<th>Date</th>
+					</tr>
 					<%
 						username = request.getParameter("username");
 						/* ArrayList<QuizTake> quizTakes = QuizTakes.getTakenQuizzesForUser(username); */
 
-						// Stub filled with dummy quizzes
-						quizzes = new ArrayList<Quiz>();
-						quizzes.add(new Quiz(0, "category", "World War II", "createdBy",
-								"description", "dateCreated", false, false, false));
-						quizzes.add(new Quiz(1, "category", "Algebra I", "createdBy",
-								"description", "dateCreated", false, false, false));
-						quizzes.add(new Quiz(2, "category", "Political Philosophy",
-								"createdBy", "description", "dateCreated", false, false,
-								false));
+						ArrayList<QuizTake> quizTakes = new ArrayList<QuizTake>();
 
-						for (Quiz quiz : quizzes) {
-							out.println("<div class=\"quiz\">");
-							out.println("<a href=\"" + quiz.hashCode() + "\">" + quiz.name
-									+ "</a>");
-							out.println("</div>");
+						for (QuizTake quizTake : quizTakes) {
+							out.println("<tr class=\"quiz\">");
+							out.println("<td><a href=\"QuizSummaryServlet?quiz=" + quizTake.quizId + "\">" + quizTake.quizName + "</a></td>");
+							out.println("<td>");
+							out.println(quizTake.score);
+							out.println("</td>");
+							out.println("<td>");
+							out.println(quizTake.timeSpent);
+							out.println("</td>");
+							out.println("<td>");
+							out.println(quizTake.dateTaken);
+							out.println("</td>");
+							out.println("</tr>");
 						}
 					%>
+					</table>
 				</div>
 
 			</div>
@@ -115,25 +115,26 @@
 			
 				<div class="profile-sidebar">
 					<div class="profile-sidebar-item">
-						<div class="photo-list-title">Friends with 20 People</div>
-						<table class="photo-list">
-							<tbody>
 								<%
 									username = request.getParameter("username");
 									ArrayList<User> friends = User.getFriendsFor(username, 0);
 									int numFriends = friends.size();
-									numFriends = 20;
+									out.println("<div class=\"photo-list-title\">Friends with " + numFriends + " People</div>");
+									out.println("<table class=\"photo-list\"><tbody>");
 									int numFriendsPerRow = 8;
+									User friend;
 									for (int i = 0; i < numFriends; i++) {
 										if (i % numFriendsPerRow == 0) {
 											out.println("<tr>");
 										}
-										out.println("<td></td");
-										out.println("<a href=\"/user/3\">");
+										friend = friends.get(i);
+										out.println("<td>");
+										out.println("<a href=\"user.jsp?username=" + friend.username + "\">");
 										out.println("<img class=\"profile-mini-image mini-image-with-tooltip\"");
 										out.println("src=\"http://animal.discovery.com/mammals/cheetah/pictures/cheetah-picture.jpg\"");
-										out.println("title=\"David Kravitz\" style=\"cursor: pointer; \">");
+										out.println("title=\"" + friend.firstName + " " + friend.lastName + "\" style=\"cursor: pointer; \">");
 										out.println("</a>");
+										out.println("</td>");
 										if (i % numFriendsPerRow == 0) {
 											out.println("<tr>");
 										}

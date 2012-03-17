@@ -192,4 +192,21 @@ public class Quiz {
 		}
 		return quizzes;
 	}
+	
+	public static ArrayList<Quiz> getFriendsCreatedQuizzes(String username, int limit) {
+		String query = "select quizzes.name, quizzes.quizId, quizzes.createdBy from quizzes inner join (select * from friends where username = '" + username + "') friends on quizzes.createdBy = friends.friendName";
+		if (limit > 0) {
+			query += " LIMIT " + limit;
+		}
+		ArrayList<Quiz> quizzes = new ArrayList<Quiz>();
+		try {
+			ResultSet rs = DBConnection.newConnection().executeQuery(query);
+			while (rs.next()) {
+				quizzes.add(new Quiz(Integer.valueOf(rs.getString("quizId")), "", rs.getString("name"), rs.getString("createdBy"), "", "", false, false, false));
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return quizzes;
+	}
 }

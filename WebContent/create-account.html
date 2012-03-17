@@ -6,14 +6,24 @@
 </head>
 <body>
 <h1>Create New Account</h1>
-<div>Please enter proposed name and password.</div>
+<div>Please fill in the following.</div>
 <form action="AccountCreationServlet" method="post">
+	<label>First Name: </label>
+    <input type="text" name="firstName">
+    <br/>
+    <label>Last Name: </label>
+    <input type="text" name="lastName">
+    <br/>
 	<label>User Name: </label>
     <input type="text" name="username">
     <br/>
     <label>Password: </label>
     <input type="password" name="password">
-    <input type="submit" name="Login">
+    <br />
+    <label>Profile Image URL: </label>
+    <input type="text" name="imageUrl">
+    <br/>
+    <input type="submit" value="Create Account">
 </form>
 </body>
 </html>

@@ -41,14 +41,11 @@
 						/* ArrayList<Quiz> quizzes = Quiz.getPopularQuizzes(numQuizzes); */
 						
 						// Stub filled with dummy quizzes
-						ArrayList<Quiz> quizzes = new ArrayList<Quiz>();
-						/*quizzes.add(new Quiz("category", "World War II", "createdBy", "description", "dateCreated", false, false, false));
-						quizzes.add(new Quiz("category", "Algebra I", "createdBy", "description", "dateCreated", false, false, false));
-						quizzes.add(new Quiz("category", "Political Philosophy", "createdBy", "description", "dateCreated", false, false, false));
-						*/
+						ArrayList<Quiz> quizzes = Quiz.getPopularQuizzes(10);
+						
 						for (Quiz quiz : quizzes) {
-							out.println("<div class=\"challenge-request\">");
-							out.println("<a href=\"quiz-summary.jsp?quiz=" + quiz.quizId + "\">");
+							out.println("<div class=\"quiz\">");
+							out.println("<a href=\"QuizSummaryServlet?quiz=" + quiz.quizId + "\">");
 							out.println(quiz.name);
 							out.println("</a>");
 							out.println("</div>");
@@ -59,62 +56,28 @@
 				<div class="homepage-section">
 					<div class="title">Recently Created Quizzes</div>
 					<%
-						/* ArrayList<Quiz> quizzes = Quiz.getQuizzes(numQuizzes); */
+						quizzes = Quiz.getQuizzes(numQuizzes);
 						for (Quiz quiz : quizzes) {
 							out.println("<div class=\"quiz\">");
-							out.println("<a href=\"" + quiz.hashCode() + "\">" + quiz.name + "</a>");
+							out.println("<a href=\"QuizSummaryServlet?quiz=" + quiz.quizId + "\">");
+							out.println(quiz.name);
+							out.println("</a>");
 							out.println("</div>");
 						}
 					%>
-				</div>
-				
-				<div class="homepage-section">
-					<div class="title">Quizzes You've Made</div>
-					<%
-		/* 				String username = (String) session.getAttribute("username");
-						quizzes = Quiz.getQuizzesBy(username, numQuizzes); */
-						for (Quiz quiz : quizzes) {
-							out.println("<div class=\"quiz\">");
-							out.println("<a href=\"" + quiz.hashCode() + "\">" + quiz.name + "</a>");
-							out.println("</div>");
-						}
-					%>
-				</div>
-				
-				<div class="homepage-section">
-					<div class="title">Quizzes You've Taken</div>
-					<%
-		/* 				String username = (String) session.getAttribute("username");
-						ArrayList<QuizTake> quizTakes = QuizTake.getTakenQuizzesForUser(username); */
-						
-						// Stub filled with dummy quizTakes
-						ArrayList<QuizTake> quizTakes = new ArrayList<QuizTake>();
-						//quizTakes.add(new QuizTake("quizName", "username", 0, "dataTaken", "timeSpent"));
-						//quizTakes.add(new QuizTake("quizName", "username", 0, "dataTaken", "timeSpent"));
-						//quizTakes.add(new QuizTake("quizName", "username", 0, "dataTaken", "timeSpent"));
-
-						
-						for (QuizTake quizTake : quizTakes) {
-							out.println("<div class=\"quiz\">");
-							//out.println("<a href=\"" + quizTake.quizName + "\">" + quizTake.quizName + "</a>");
-							out.println("</div>");
-						}
-					%>
-				</div>
-				
+				</div>				
 				
 				<div class="homepage-section">
 					<div class="title">Quizzes Your Friends Recently Took</div>
 										<%
-		/* 				String username = (String) session.getAttribute("username");
-						ArrayList<QuizTake> quizTakes = QuizTake.getFriendsRecentQuizzes(username); */
+						ArrayList<QuizTake> quizTakes = QuizTake.getFriendsRecentQuizzes(loggedInUser, 10);
 						
-						// Stub filled with dummy Users
-						quizTakes.add(new QuizTake("dummy_name", 1, "username", 0, 0, "dataTaken", "timeSpent"));
-						String username = "david";
 						for (QuizTake quizTake : quizTakes) {
-							out.println("<div class=\"quiz\">");
+							String username = quizTake.username;
+							out.println("<div class=\"quizTake\">");
 							out.println("<a href=\"user.jsp?username=" + username + "\">" + username + "</a>");
+							out.println(" recently took ");
+							out.println("<a href=\"QuizSummaryServlet?quiz=" + quizTake.quizId + "\">" + quizTake.quizName + "</a>");
 							out.println("</div>");
 						}
 					%>
@@ -122,16 +85,13 @@
 				
 				<div class="homepage-section">
 					<div class="title">Quizzes Your Friends Recently Created</div>
-										<%
-		/* 				String username = (String) session.getAttribute("username");
-						ArrayList<QuizTake> quizTakes = QuizTake.getFriendsRecentQuizzes(username); */
-						
-						// Stub filled with dummy Users
-						quizTakes.add(new QuizTake("another dummy name", 1, "username", 0, 0, "dataTaken", "timeSpent"));
-						username = "david";
-						for (QuizTake quizTake : quizTakes) {
-							out.println("<div class=\"quiz\">");
-							out.println("<a href=\"user.jsp?username=" + username + "\">" + username + "</a>");
+					<%
+						quizzes = Quiz.getFriendsCreatedQuizzes(loggedInUser, 10);
+						for (Quiz quiz : quizzes) {
+							out.println("<div class=\"quizTake\">");
+							out.println("<a href=\"user.jsp?username=" + quiz.createdBy + "\">" + quiz.createdBy + "</a>");
+							out.println(" recently created ");
+							out.println("<a href=\"QuizSummaryServlet?quiz=" + quiz.quizId + "\">" + quiz.name + "</a>");
 							out.println("</div>");
 						}
 					%>

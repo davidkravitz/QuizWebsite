@@ -19,13 +19,20 @@
 
 				<div class="profile-header">
 					<div class="profile-image">
-						<img
-							src="http://animal.discovery.com/mammals/cheetah/pictures/cheetah-picture.jpg">
+					<%
+					out.println("<img src=\"");
+					out.println(model.User.getUser((String) request.getParameter("username")).imageUrl); 
+					out.println("\" />");
+					%>
 					</div>
 					<div class="profile-info">
-						<div class="title profile-name"><%=request.getParameter("username")%></div>
 						<%
 							String currUser = request.getParameter("username");
+							User user = User.getUser(currUser);
+							out.println("<div class=\"title profile-name\">");
+							out.println(user.firstName + " " + user.lastName);
+							out.println("</div>");
+						
 							if (!currUser.equals(loggedInUser)) {
 								int status = FriendRequest.getFriendStatus(loggedInUser, currUser);
 								if (status == 0) {
@@ -43,15 +50,17 @@
 									out.println("<input class=\"button profile-button\" type=\"submit\" value=\"Accept Friend Request\">");
 									out.println("</form>");
 								} else {
-									out.println("Friends");
+									
+									out.println("You and " + user.firstName + " are friends.");
 								}
 							}
 						 %>
 					</div>
 					<%
 					if (!currUser.equals(loggedInUser)) {
+						User curr = User.getUser(currUser);
 						out.println("<form action=\"SendMessageServlet\" method=\"post\" class=\"message-form\">");
-						out.println("<textarea name=\"message\">Send " + request.getParameter("username") + " a message.</textarea>");
+						out.println("<textarea name=\"message\">Send " + curr.firstName + " a message.</textarea>");
 						out.println("<input type=\"hidden\" name=\"recipientName\" value=\"" + request.getParameter("username") + "\" />"); 
 						out.println("<input class=\"button profile-button\" type=\"submit\" value=\"Send\" />");
 						out.println("</form>");
@@ -162,7 +171,7 @@
 										out.println("<td>");
 										out.println("<a href=\"user.jsp?username=" + friend.username + "\">");
 										out.println("<img class=\"profile-mini-image mini-image-with-tooltip\"");
-										out.println("src=\"http://animal.discovery.com/mammals/cheetah/pictures/cheetah-picture.jpg\"");
+										out.println("src=\"" + friend.imageUrl + "\"");
 										out.println("title=\"" + friend.firstName + " " + friend.lastName + "\" style=\"cursor: pointer; \">");
 										out.println("</a>");
 										out.println("</td>");

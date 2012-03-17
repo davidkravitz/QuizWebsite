@@ -21,8 +21,6 @@
         <div id="content">
 			<div id="left-column">
 			
-				<div class="title">Search Results</div>
-			
 				<div class="homepage-section">
 					<div class="title">Quizzes</div>
 					<%
@@ -47,7 +45,7 @@
 						for (User user : users) {
 							out.println("<div class=\"search-result\">");
 							out.println("<a href=\"user.jsp?username=" + user.username + "\">");
-							out.println(user.username);
+							out.println(user.firstName + " " + user.lastName);
 							out.println("</a>");
 							out.println("</div>");
 						}

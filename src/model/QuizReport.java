@@ -2,7 +2,10 @@ package model;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 
 public class QuizReport {
 	public String username;
@@ -18,8 +21,11 @@ public class QuizReport {
 		this.dateCreated = dateCreated;
 	}
 	
-	public static void reportQuiz(String username, int quizId, String message, String type, String dateCreated) {
-		String query = "INSERT into " + DBConnection.reportedQuizzesTable + " (username, quizId, message, type, dateCreated) VALUES ('" + username + "', '" + quizId + "', '" + message + "', '" + type + "', '" + dateCreated + "')";
+	public static void reportQuiz(String username, int quizId, String message, String type) {
+		DateFormat dateFormat = new SimpleDateFormat("yyyy:MM:dd HH:mm:ss");
+		Date date = new Date();
+		String stringDate = dateFormat.format(date);
+		String query = "INSERT into " + DBConnection.reportedQuizzesTable + " (username, quizId, message, type, dateCreated) VALUES ('" + username + "', '" + quizId + "', '" + message + "', '" + type + "', '" + stringDate + "')";
 		try {
 			DBConnection.newConnection().executeUpdate(query);
 		} catch (SQLException e) {

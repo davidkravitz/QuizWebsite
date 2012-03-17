@@ -65,15 +65,61 @@
 							out.println("</div>");
 						}
 					%>
-				</div>				
+				</div>	
+				
+				<div class="homepage-section">
+					<div class="title">Quizzes You've Made</div>
+					<%
+						String username = request.getParameter("username");
+						// Stub filled with dummy quizzes
+						quizzes = Quiz.getQuizzesBy(username, 0);
+						for (Quiz quiz : quizzes) {
+							out.println("<div class=\"quiz\">");
+							out.println("<a href=\"QuizSummaryServlet?quiz=" + quiz.quizId + "\">" + quiz.name
+									+ "</a>");
+							out.println("</div>");
+						}
+					%>
+				</div>	
+				
+				<div class="homepage-section">
+					<div class="title">Quizzes You've Taken</div>
+					<table border="1">
+					<tr>
+					<th>Quiz Name</th>
+					<th>Score</th>
+					<th>Time Spent</th>
+					<th>Date</th>
+					</tr>
+					<%
+						username = request.getParameter("username");
+						ArrayList<QuizTake> quizTakes = new ArrayList<QuizTake>();
+
+						for (QuizTake quizTake : quizTakes) {
+							out.println("<tr class=\"quiz\">");
+							out.println("<td><a href=\"QuizSummaryServlet?quiz=" + quizTake.quizId + "\">" + quizTake.quizName + "</a></td>");
+							out.println("<td>");
+							out.println(quizTake.score);
+							out.println("</td>");
+							out.println("<td>");
+							out.println(quizTake.timeSpent);
+							out.println("</td>");
+							out.println("<td>");
+							out.println(quizTake.dateTaken);
+							out.println("</td>");
+							out.println("</tr>");
+						}
+					%>
+					</table>
+				</div>		
 				
 				<div class="homepage-section">
 					<div class="title">Quizzes Your Friends Recently Took</div>
 					<%
-						ArrayList<QuizTake> quizTakes = QuizTake.getFriendsRecentQuizzes(loggedInUser, 10);
+						quizTakes = QuizTake.getFriendsRecentQuizzes(loggedInUser, 10);
 						
 						for (QuizTake quizTake : quizTakes) {
-							String username = quizTake.username;
+							username = quizTake.username;
 							out.println("<div class=\"quizTake\">");
 							out.println("<a href=\"user.jsp?username=" + username + "\">" + username + "</a>");
 							out.println(" recently took ");
@@ -101,7 +147,9 @@
 			
 			<div id="right-column">
 				<div class="announcement">
-				    <p>Here are your messages:</p>
+				    Check out your 
+				    <a href="messages.jsp">inbox</a> 
+				    to see your new friend requests, challenges, and notes! 
 				</div>
 			</div>
 		</div>

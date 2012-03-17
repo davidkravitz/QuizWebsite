@@ -55,7 +55,6 @@ public class AdminFilter implements Filter {
 				httpRequest.getSession().setAttribute("requestedUrl", requestedUrl);
 
 			}
-
 			request.getRequestDispatcher("admin-login.html").forward(httpRequest, httpResponse);
 		} else if (!User.isAdminUser(user.username)){
 			request.getRequestDispatcher("admin-login.html").forward(httpRequest, httpResponse);

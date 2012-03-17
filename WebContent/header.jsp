@@ -17,13 +17,14 @@
 			<a href="index.jsp" class="logo">QuizWebsite</a>
 		</div>
 		<!-- Search -->
-		<form method="get" id="searchform" action="SearchServlet">
 			<div id="search">
-				<span> <input type="text" name="q" placeholder="Search"
-					size="40" />
-					<button class="search-button" title="Search" /> </span>
+				<form action="search.jsp" method="get" class="search-form">"
+					<span>
+						<input type="text" name="query" placeholder="Search" size="40" />
+						<button type="submit" class="search-button" title="Search" /> 
+					</span>
+				</form>
 			</div>
-		</form>
 
 		<ul id="user-nav">
 
@@ -38,19 +39,25 @@
 			<li id="nav-account">
 				<div id="profile-container">
 					<div id="session">
-						<a id="session-name" href="user.jsp?username=<%=(String) session.getAttribute("username")%>"> <%=(String) session.getAttribute("username")%>
+						<a id="session-name" href="user.jsp?username=<%=(String) session.getAttribute("username")%>">
+						<%
+						out.println(model.User.getUser((String) session.getAttribute("username")).firstName); 
+						%>
 						</a> <span class="arrow-down arrow-down-unselected"></span>
 					</div>
+					
+					<%
+					out.println("<img src=\"");
+					out.println(model.User.getUser((String) session.getAttribute("username")).imageUrl); 
+					out.println("\" id=\"header-profile-pic\" />");
+					%>
 
-					<img
-						src="http://animal.discovery.com/mammals/cheetah/pictures/cheetah-picture.jpg"
-						id="header-profile-pic" />
 					<div class="clearfloat"></div>
 				</div>
 				<div class="dropdown">
 					<ul id="user-dropdown">
 						<li><a href="user.jsp?username=<%=(String) session.getAttribute("username")%>">Profile</a></li>
-						<li><a href="messages.jsp">Messages</a></li>
+						<li><a href="messages.jsp">Inbox</a></li>
 						<li><a href="logout.jsp">Log Out</a></li>
 					</ul>
 				</div>

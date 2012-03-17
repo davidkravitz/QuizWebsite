@@ -48,10 +48,10 @@
 								username, 0);
 						for (Challenge challenge : challenges) {
 							out.println("<div class=\"challenge\">");
-							out.println(challenge.username + " has challenged you to take a quiz.");
+							out.println(challenge.username + " has challenged you to take " + challenge.quizName + ".");
 							out.println("<div class=\"challenge-request\">");
-							out.println("<a href=\"quiz-summary.jsp?quiz=" + challenge.quizId + "\">");
-							out.println("Take " + challenge.quizName + "!");
+							out.println("<a href=\"AcceptChallenge?quiz=" + challenge.quizId + "&cId=" + challenge.challengeId + "\">");
+							out.println("Accept Challenge!");
 							out.println("</a>");
 							out.println("</div>");
 							out.println("</div>");

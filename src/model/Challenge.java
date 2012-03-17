@@ -19,7 +19,7 @@ public class Challenge {
 	}
 	
 	public static void challengeUser(String username, String challengedUser, int quizId, String quizName) {
-		String query = "INSERT into challenges (username, challengedUser, quizId, quizName) values ('" + username + "', '" + challengedUser + "', " + quizId + "', '" + quizName + "')";
+		String query = "INSERT into challenges (username, challengedUser, quizId, quizName) values ('" + username + "', '" + challengedUser + "', '" + quizId + "', '" + quizName + "')";
 		try {
 			DBConnection.newConnection().executeUpdate(query);
 		} catch (SQLException e) {
@@ -28,7 +28,7 @@ public class Challenge {
 	}
 	
 	public static ArrayList<Challenge> getChallengesForUser(String username, int limit) {
-		String query = "select * from challenges where username = '" + username + "'";
+		String query = "select * from challenges where challengedUser = '" + username + "'";
 		if (limit > 0) {
 			query += " LIMIT " + limit;
 		}

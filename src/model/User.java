@@ -119,7 +119,9 @@ public class User {
 	}
 	
 	public static void createUser(String username, String password, String firstName, String lastName, String imageUrl) {
-		System.out.println("Creating new user");
+		if (imageUrl.equals("")) {
+			imageUrl = "http://2.bp.blogspot.com/-ORJ7HBYkhv0/TV5nq5j-yyI/AAAAAAAAAxU/OU1bYE3iDKM/s1600/cheetah-cubs.jpg";
+		}
 		String encryptedPw = createHash(password);
 		DateFormat dateFormat = new SimpleDateFormat("yyyy:MM:dd HH:mm:ss");
 		Date date = new Date();
@@ -142,7 +144,7 @@ public class User {
 	}
 	
 	public static ArrayList<User> getSimilarUsernames(String username, int limit) {
-		String query = "SELECT * FROM " + DBConnection.userTable + " WHERE username LIKE '" + username + "' " + " ORDER BY dateCreated DESC";
+		String query = "SELECT * FROM " + DBConnection.userTable + " WHERE username LIKE '%" + username + "%' " + " ORDER BY dateJoined DESC";
 		if (limit > 0) {
 			query += " LIMIT " + limit;
 		}

@@ -45,7 +45,7 @@
 							out.println(quizReport.username);
 							out.println("</td>");
 							out.println("<td>");
-							out.println("<a href=\"" + quizReport.quizId + "\">See Quiz</a>");
+							out.println("<a href=\"QuizSummaryServlet?quiz=" + quizReport.quizId + "\">See Quiz</a>");
 							out.println("</td>");
 							out.println("<td>");
 							out.println(quizReport.message);

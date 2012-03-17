@@ -17,13 +17,14 @@
 			<a href="index.jsp" class="logo">QuizWebsite</a>
 		</div>
 		<!-- Search -->
-		<form method="get" id="searchform" action="SearchServlet">
 			<div id="search">
-				<span> <input type="text" name="q" placeholder="Search"
-					size="40" />
-					<button class="search-button" title="Search" /> </span>
+				<form action="search.jsp" method="get" class="search-form">"
+					<span>
+						<input type="text" name="query" placeholder="Search" size="40" />
+						<button type="submit" class="search-button" title="Search" /> 
+					</span>
+				</form>
 			</div>
-		</form>
 
 		<ul id="user-nav">
 

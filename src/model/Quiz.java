@@ -177,7 +177,7 @@ public class Quiz {
 	}
 	
 	public static ArrayList<Quiz> getSimilarQuizName(String quizName, int limit) {
-		String query = "SELECT * FROM " + DBConnection.quizTable + " WHERE name LIKE '" + quizName + "' " + " ORDER BY dateCreated DESC";
+		String query = "SELECT * FROM " + DBConnection.quizTable + " WHERE name LIKE '%" + quizName + "%' " + " ORDER BY dateCreated DESC";
 		if (limit > 0) {
 			query += " LIMIT " + limit;
 		}

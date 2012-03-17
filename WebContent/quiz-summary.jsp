@@ -133,6 +133,18 @@
 	</div>
 </div>
 
+<div id="challengeFriend">
+<h3>Challenge</h3>
+<form action="ChallengeFriend" method="post">
+Friend's username:&nbsp;&nbsp;&nbsp;<input type="text" name="friendName" /> &nbsp;
+<input type="hidden" name="quizId" value="<%= quiz.quizId %>" />
+<input type="hidden" name="quizName" value="<%= quiz.name %>" />
+<input type="submit" value="Challenge!" />
+</form>
+</div>
+
+<br/>
+
 <div id="takeQuizLink">
 	<%
 	out.println("<a href=\"take-quiz.jsp?quiz="+quiz.quizId+"\">");

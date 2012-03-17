@@ -142,7 +142,7 @@ public class User {
 	}
 	
 	public static ArrayList<User> getSimilarUsernames(String username, int limit) {
-		String query = "SELECT * FROM " + DBConnection.userTable + " WHERE username LIKE '" + username + "' " + " ORDER BY dateCreated DESC";
+		String query = "SELECT * FROM " + DBConnection.userTable + " WHERE username LIKE '%" + username + "%' " + " ORDER BY dateJoined DESC";
 		if (limit > 0) {
 			query += " LIMIT " + limit;
 		}

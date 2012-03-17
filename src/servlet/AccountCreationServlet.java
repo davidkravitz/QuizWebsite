@@ -30,6 +30,9 @@ public class AccountCreationServlet extends HttpServlet {
 		// Get the name and password entered by the user
 		String username = request.getParameter("username");
 		String password = request.getParameter("password");
+		String firstName = request.getParameter("firstName");
+		String lastName = request.getParameter("lastName");
+		String imageUrl = request.getParameter("imageUrl");
 		
 		// Check with the account manager and see if the username exists. If it does,
 		// switch to the "account name in use" page. Otherwise, switch to the
@@ -40,7 +43,7 @@ public class AccountCreationServlet extends HttpServlet {
 			session.setAttribute("username", username);
 			request.getRequestDispatcher("account-exists.jsp").forward(request, response);
 		} else {
-			User.createUser(username, password, "", "", "");
+			User.createUser(username, password, firstName, lastName, imageUrl);
 			HttpSession session = request.getSession();
 			User user = User.getUser(username);
 			session.setAttribute("username", username);

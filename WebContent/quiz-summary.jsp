@@ -7,6 +7,8 @@
 <%
 	Quiz quiz = (Quiz) request.getAttribute("quiz");	
 	User user = (User) request.getSession().getAttribute("user");
+	if (user == null)
+		user = User.getUser((String) request.getSession().getAttribute("username"));
 	
 %>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">

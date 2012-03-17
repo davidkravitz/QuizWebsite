@@ -152,7 +152,22 @@ Friend's username:&nbsp;&nbsp;&nbsp;<input type="text" name="friendName" /> &nbs
 	%>
 </div>
 
-
+<br/>
+<div id="reportQuiz">
+<h3>Report Quiz</h3>
+	<form action="ReportQuiz" method="post">
+	Type:
+	<select name="type">
+	<option value="Bad quiz">Bad quiz</option>
+	<option value="Inappropriate">Inappropriate</option>
+	</select>
+	<br/>
+	Description:<br/>
+	<textarea name="description" rows="5" cols="30"></textarea><br/>
+	<input type="hidden" name="quizId" value="<%= quiz.quizId %>" />
+	<input type="submit" value="Report Quiz" />
+	</form>
+</div>
 
 </body>
 </html>

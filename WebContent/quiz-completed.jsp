@@ -12,7 +12,7 @@
 <%
 	String timeElapsed = (String) request.getAttribute("time");
 	String grade = (String) request.getAttribute("grade");
-	Quiz completed = (Quiz) request.getAttribute("currentTakingQuiz");	
+	Quiz completed = (Quiz) request.getSession().getAttribute("currentTakingQuiz");	
 	int quizId = completed.quizId;
 	System.out.println("Quiz id: "+quizId);
 %>

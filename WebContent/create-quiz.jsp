@@ -25,7 +25,7 @@ First, enter some basic data about the quiz
     		}
     	%>
     </select>
-    <br/><input type="submit" value="Continue">
+    <br/><input type="submit" value="Continue" />
 </form>
 
 </body>

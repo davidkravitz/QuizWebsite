@@ -43,7 +43,8 @@
 		}
 		
 		//dummy data
-		takesForThisQuiz.add(new QuizTake("dummy name", 1, user.username, quiz.quizId, 50, "Today", "10 sec"));
+		//takesForThisQuiz.add(new QuizTake(1, user.username, quiz.quizId, 50, "Today", "10 sec"));
+
 		
 		if(takesForThisQuiz.isEmpty()) {
 			out.println("You have not taken this quiz yet");

@@ -29,7 +29,6 @@ public class CreateQuizServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		//request.getRequestDispatcher(successUrl).forward(request, response);
 	}
 
 	/**
@@ -60,7 +59,12 @@ public class CreateQuizServlet extends HttpServlet {
 		
 		int quizId = Quiz.createQuiz(quizName, category, description, createdBy, randomized, multiplePage, immediateCorrection);
 		Quiz curr = Quiz.getQuiz(quizId);
-		//	System.out.println("Just created a quiz! "+quizId);
+
+		System.out.println("Just created a quiz! "+quizId);
+		if(curr == null) {
+			System.out.println("OH SHIT");
+		}
+		System.out.println("Quiz name:"+curr.name);
 		request.getSession().setAttribute("currCreationQuiz", curr);
 		request.getSession().setAttribute("quizFinished", false);
 		

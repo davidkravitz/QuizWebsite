@@ -24,7 +24,7 @@ public class DBConnection {
 	static String quizTakeTable = "quizTakes";
 	static String quizContentTable = "quizContents";
 	static String quizRatingTable = "quizRatings";
-	static String trQuestionTable = "trQuestinos";
+	static String trQuestionTable = "trQuestions";
 	static String fibQuestionTable = "fibQuestions";
 	static String mcQuestionTable = "mcQuestions";
 	static String prQuestionTable = "prQuestions";

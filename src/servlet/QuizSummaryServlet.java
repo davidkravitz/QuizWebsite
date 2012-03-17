@@ -32,14 +32,15 @@ public class QuizSummaryServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		int quizId = Integer.valueOf(request.getParameter("quiz"));
-		//Quiz curr = Quiz.getQuiz(quizId);
-		Quiz curr = new Quiz(1, "Math", "Algebra I", "Sheldon", "This quiz is meant for Algebra 1 students", "2012-3-14", false, false, false);
+		Quiz curr = Quiz.getQuiz(quizId);
+		//Quiz curr = new Quiz(1, "Math", "Algebra I", "Sheldon", "This quiz is meant for Algebra 1 students", "2012-3-14", false, false, false);
 		
 		String username = (String)request.getSession().getAttribute("username");
 		User user = (User) request.getSession().getAttribute("user");
 
 		if(curr != null) {
-			//System.out.println("Quiz desc: "+curr.description);
+			System.out.println("Quiz name: "+curr.name);
+			System.out.println("Quiz desc: "+curr.description);
 			request.setAttribute("quiz", curr);
 			request.getRequestDispatcher(successUrl).forward(request, response);
 		}

@@ -69,7 +69,7 @@
 				
 				<div class="homepage-section">
 					<div class="title">Quizzes Your Friends Recently Took</div>
-										<%
+					<%
 						ArrayList<QuizTake> quizTakes = QuizTake.getFriendsRecentQuizzes(loggedInUser, 10);
 						
 						for (QuizTake quizTake : quizTakes) {
@@ -85,7 +85,7 @@
 				
 				<div class="homepage-section">
 					<div class="title">Quizzes Your Friends Recently Created</div>
-					<%
+					<% 
 						quizzes = Quiz.getFriendsCreatedQuizzes(loggedInUser, 10);
 						for (Quiz quiz : quizzes) {
 							out.println("<div class=\"quizTake\">");

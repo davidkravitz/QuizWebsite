@@ -21,7 +21,7 @@ $(document).ready(function() {
 			$('#addAnswer').html("Answer<br/> <input type=\"text\" name=\"answer\" size=\"30\"/>")
 		} else if(value == "PR") {
 			$('#addQuestion').html("Question <br/> <input type=\"text\" name=\"question\" size=\"60\" />")
-			$('#addQuestion').html("Question picture link <br/> <input type=\"text\" name=\"picture\" size=\"60\"/>")
+			$('#addQuestion').append("<br/>Question picture link <br/> <input type=\"text\" name=\"picture\" size=\"60\"/>")
 			$('#addAnswer').html("Answer<br/> <input type=\"text\" name=\"answer\" size=\"30\"/>")
 		} else { //FIB
 			$('#addQuestion').html("Question with a single '_' char for the blank <br/> <input type=\"text\" name=\"question\" size=\"60\"/>");

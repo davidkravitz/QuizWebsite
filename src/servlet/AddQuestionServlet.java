@@ -23,6 +23,7 @@ import model.TRQuestion;
 public class AddQuestionServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	private static final String successUrl = "added-question.jsp";
+	private static final String homeUrl = "index.jsp";
        
     /**
      * @see HttpServlet#HttpServlet()
@@ -36,7 +37,8 @@ public class AddQuestionServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
+		request.getSession().setAttribute("quizFinished", true);
+		request.getRequestDispatcher(homeUrl).forward(request, response);
 	}
 
 	/**
@@ -66,19 +68,24 @@ public class AddQuestionServlet extends HttpServlet {
 			if(answerChoice.equals("A")) correct = answerA;
 			else if(answerChoice.equals("B")) correct = answerB;
 			else correct = answerC;
-			
 			MCQuestion.createMCQuestion(questionNum, question, correct, answerA, answerB, answerC, curr.quizId);
+			request.getRequestDispatcher(successUrl).forward(request, response);
 		} else if(questionType.equals("QR")) {
+			
 			String answer = request.getParameter("answer");
 			TRQuestion.createTRQuestion(questionNum, question, answer, curr.quizId);
 			request.getRequestDispatcher(successUrl).forward(request, response);
 		} else if(questionType.equals("PR")) {
+			
 			String image = request.getParameter("picture");
 			String answer = request.getParameter("answer");
 			PRQuestion.createPRQuestion(questionNum, question, image, answer, curr.quizId);
+			request.getRequestDispatcher(successUrl).forward(request, response);
 		} else if(questionType.equals("FIB")) { 
+			
 			String answer = request.getParameter("answer");
 			FIBQuestion.createFIBQuestion(questionNum, question, answer, curr.quizId);
+			request.getRequestDispatcher(successUrl).forward(request, response);
 		}
 	}
 

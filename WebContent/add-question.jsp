@@ -34,7 +34,7 @@
 			<div id="addAnswer">
 			</div>
 			
-			<input type="submit"value="Add Question">
+			<input type="submit" value="Add Question">
 		</form>
 	</div>
 

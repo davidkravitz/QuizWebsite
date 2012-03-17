@@ -61,7 +61,7 @@ public class QuizTake {
 		try {
 			ResultSet rs = DBConnection.newConnection().executeQuery(query);
 			while (rs.next()) {
-				quizTakes.add(new QuizTake(rs.getString("quizTake"), Integer.valueOf(rs.getString("qtId")), rs.getString("username"), Integer.valueOf(rs.getString("quizId")), Integer.valueOf(rs.getString("score")), rs.getString("dateTaken"), rs.getString("timeSpent")));
+				quizTakes.add(new QuizTake(rs.getString("quizName"), Integer.valueOf(rs.getString("qtId")), rs.getString("username"), Integer.valueOf(rs.getString("quizId")), Integer.valueOf(rs.getString("score")), rs.getString("dateTaken"), rs.getString("timeSpent")));
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();

@@ -32,16 +32,21 @@ public class MCQuestion extends Question {
 	}
 	
 	public String[] getAnswers() {
-		Set<String> answers = new HashSet<String>();
-		answers.add(correctAnswer);
-		answers.add(icOne);
-		answers.add(icTwo);
-		answers.add(icThree);
-		return (String[]) answers.toArray();
+//		Set<String> answers = new HashSet<String>();
+//		answers.add(correctAnswer);
+//		answers.add(icOne);
+//		answers.add(icTwo);
+//		answers.add(icThree);
+//		return (String[]) answers.toArray();
+		String[] answers = new String[3];
+		answers[0] = icOne;
+		answers[1] = icTwo;
+		answers[2] = icThree;
+		return answers;
 	}
 	
 	public static void createMCQuestion(int questionNumber, String prompt, String correctAnswer, String icAnswerOne, String icAnswerTwo, String icAnswerThree, int quizId) {
-		String query = "INSERT into " + DBConnection.mcQuestionTable + " (questionNumber, question, correctAnswer, icAnswerOne, icAnswerTwo, icAnswerThree, quizId) VALUES ('MC_" + questionNumber + "', '" + prompt + "', '" + correctAnswer + "', '" + icAnswerOne + "', '" + icAnswerTwo + "', '" + icAnswerThree + "', '" + quizId + "')";
+		String query = "INSERT into " + DBConnection.mcQuestionTable + " (questionId, question, correctAnswer, icAnswerOne, icAnswerTwo, icAnswerThree, quizId) VALUES ('MC_" + questionNumber + "', '" + prompt + "', '" + correctAnswer + "', '" + icAnswerOne + "', '" + icAnswerTwo + "', '" + icAnswerThree + "', '" + quizId + "')";
 		try {
 			DBConnection.newConnection().executeUpdate(query);
 		} catch (SQLException e) {

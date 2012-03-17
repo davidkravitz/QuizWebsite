@@ -59,10 +59,10 @@ public class AddQuestionServlet extends HttpServlet {
 			String answerA = request.getParameter("A");
 			String answerB = request.getParameter("B");
 			String answerC = request.getParameter("C");
-//			System.out.println("Answer: "+answerChoice);
-//			System.out.println("A: "+answerA);
-//			System.out.println("B: "+answerB);
-//			System.out.println("C: "+answerC);
+			System.out.println("Answer: "+answerChoice);
+			System.out.println("A: "+answerA);
+			System.out.println("B: "+answerB);
+			System.out.println("C: "+answerC);
 			
 			String correct;
 			if(answerChoice.equals("A")) correct = answerA;

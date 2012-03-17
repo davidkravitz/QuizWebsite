@@ -22,7 +22,7 @@ public class FIBQuestion extends Question {
 	}
 
 	public static void createFIBQuestion(int questionNumber, String prompt, String correctAnswer, int quizId) {
-		String query = "INSERT into " + DBConnection.fibQuestionTable + " (questionNumber, question, correctAnswer, quizId) VALUES ('FIB_" + questionNumber + "', '" + prompt + "', '" + correctAnswer + "', '" + quizId + "')";
+		String query = "INSERT into " + DBConnection.fibQuestionTable + " (questionId, question, correctAnswer, quizId) VALUES ('FIB_" + questionNumber + "', '" + prompt + "', '" + correctAnswer + "', '" + quizId + "')";
 		try {
 			DBConnection.newConnection().executeUpdate(query);
 		} catch (SQLException e) {

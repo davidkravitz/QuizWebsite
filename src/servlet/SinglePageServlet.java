@@ -89,7 +89,6 @@ public class SinglePageServlet extends HttpServlet {
 					numRight++;
 			}
 		}
-		
 		QuizTake.recordCompletedQuiz(quiz.quizId, quiz.name, user.username, numRight, String.valueOf(timeDiff));
 		request.setAttribute("grade", String.valueOf(numRight));
 		request.setAttribute("time", String.valueOf(timeDiff));
